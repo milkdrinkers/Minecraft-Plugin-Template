@@ -237,6 +237,7 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
     public void migrate() throws DatabaseInitializationException {
         try {
             new MigrationHandler(
+                logger,
                 connectionPool,
                 config
             )
