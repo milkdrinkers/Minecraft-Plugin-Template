@@ -204,6 +204,7 @@ public final class Queries {
     public static final class Sync {
         /**
          * Fetch the latest (greatest) message ID from the database.
+         *
          * @return the message id or empty if no messages are queued
          */
         public static Optional<Integer> fetchLatestMessageId() {
@@ -213,8 +214,8 @@ public final class Queries {
                 DSLContext context = DB.getContext(con);
 
                 return context
-                    .select(max(SYNC.ID))
-                    .from(SYNC)
+                    .select(max(MESSAGING.ID))
+                    .from(MESSAGING)
                     .fetchOptional(0, Integer.class);
             } catch (SQLException e) {
                 Logger.get().error("SQL Query threw an error!" + e);
@@ -224,6 +225,7 @@ public final class Queries {
 
         /**
          * Adds a message to the database.
+         *
          * @param message the outgoing message to send
          * @return the new message id or empty if insert failed
          */
@@ -234,12 +236,12 @@ public final class Queries {
                 DSLContext context = DB.getContext(con);
 
                 return context
-                    .insertInto(SYNC, SYNC.TIMESTAMP, SYNC.MESSAGE)
+                    .insertInto(MESSAGING, MESSAGING.TIMESTAMP, MESSAGING.MESSAGE)
                     .values(
                         currentLocalDateTime(),
                         val(message.encode())
                     )
-                    .returningResult(SYNC.ID)
+                    .returningResult(MESSAGING.ID)
                     .fetchOptional(0, Integer.class);
             } catch (SQLException e) {
                 Logger.get().error("SQL Query threw an error!" + e);
@@ -249,7 +251,8 @@ public final class Queries {
 
         /**
          * Fetch all messages from the database.
-         * @param latestSyncId the currently synced to message id
+         *
+         * @param latestSyncId    the currently synced to message id
          * @param cleanupInterval the configured cleanup interval
          * @return the messages
          */
@@ -260,13 +263,13 @@ public final class Queries {
                 DSLContext context = DB.getContext(con);
 
                 return context
-                    .selectFrom(SYNC)
-                    .where(SYNC.ID.greaterThan(latestSyncId)
-                        .and(SYNC.TIMESTAMP.greaterOrEqual(localDateTimeSub(currentLocalDateTime(), cleanupInterval / 1000, DatePart.SECOND))) // Checks TIMESTAMP >= now() - cleanupInterval
+                    .selectFrom(MESSAGING)
+                    .where(MESSAGING.ID.greaterThan(latestSyncId)
+                        .and(MESSAGING.TIMESTAMP.greaterOrEqual(localDateTimeSub(currentLocalDateTime(), cleanupInterval / 1000, DatePart.SECOND))) // Checks TIMESTAMP >= now() - cleanupInterval
                     )
-                    .orderBy(SYNC.ID.asc())
+                    .orderBy(MESSAGING.ID.asc())
                     .fetch()
-                    .intoMap(SYNC.ID, r -> Message.from(r.getMessage()));
+                    .intoMap(MESSAGING.ID, r -> BidirectionalMessage.from(r.getMessage()));
             } catch (SQLException e) {
                 Logger.get().error("SQL Query threw an error!" + e);
                 return Map.of();
@@ -275,6 +278,7 @@ public final class Queries {
 
         /**
          * Deletes all outdate messages from the database.
+         *
          * @param cleanupInterval the configured cleanup interval
          */
         public static void cleanup(long cleanupInterval) {
@@ -284,8 +288,8 @@ public final class Queries {
                 DSLContext context = DB.getContext(con);
 
                 context
-                    .deleteFrom(SYNC)
-                    .where(SYNC.TIMESTAMP.lessThan(localDateTimeSub(currentLocalDateTime(), cleanupInterval / 1000, DatePart.SECOND))) // Checks TIMESTAMP < now() - cleanupInterval
+                    .deleteFrom(MESSAGING)
+                    .where(MESSAGING.TIMESTAMP.lessThan(localDateTimeSub(currentLocalDateTime(), cleanupInterval / 1000, DatePart.SECOND))) // Checks TIMESTAMP < now() - cleanupInterval
                     .execute();
             } catch (SQLException e) {
                 Logger.get().error("SQL Query threw an error!" + e);

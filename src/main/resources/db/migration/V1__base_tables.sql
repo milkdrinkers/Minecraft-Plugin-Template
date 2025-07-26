@@ -1,5 +1,5 @@
 -- Table for using database messaging service
-CREATE TABLE IF NOT EXISTS "${tablePrefix}sync" (
+CREATE TABLE IF NOT EXISTS "${tablePrefix}messaging" (
     "id" INT AUTO_INCREMENT NOT NULL,
     "message" TEXT NOT NULL,
     "timestamp" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
