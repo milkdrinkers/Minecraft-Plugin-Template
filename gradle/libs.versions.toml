@@ -33,7 +33,7 @@ hikaricp = "com.zaxxer:HikariCP:7.0.2"
 flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
 flyway-mysql = { module = "org.flywaydb:flyway-mysql", version.ref = "flyway" }
 jooq = { module = "org.jooq:jooq", version.ref = "jooq" }
-jakarta = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.2" # Compiler bug, see: https://github.com/jOOQ/jOOQ/issues/14865#issuecomment-2077182512
+jakarta = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.4" # Compiler bug, see: https://github.com/jOOQ/jOOQ/issues/14865#issuecomment-2077182512
 
 # JDBC drivers
 h2 = "com.h2database:h2:2.3.232"
