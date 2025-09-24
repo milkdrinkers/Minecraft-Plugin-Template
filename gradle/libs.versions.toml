@@ -36,7 +36,7 @@ jooq = { module = "org.jooq:jooq", version.ref = "jooq" }
 jakarta = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.4" # Compiler bug, see: https://github.com/jOOQ/jOOQ/issues/14865#issuecomment-2077182512
 
 # JDBC drivers
-h2 = "com.h2database:h2:2.3.232"
+h2 = "com.h2database:h2:2.4.240"
 sqlite = "org.xerial:sqlite-jdbc:3.50.3.0"
 mysql = "com.mysql:mysql-connector-j:9.4.0"
 mariadb = "org.mariadb.jdbc:mariadb-java-client:3.5.6"
