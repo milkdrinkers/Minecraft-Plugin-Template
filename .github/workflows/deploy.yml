@@ -34,7 +34,7 @@ jobs:
     steps:
       # Download the release artifacts uploaded in the previous workflow
       - name: Download Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         id: download
         continue-on-error: false
         with:

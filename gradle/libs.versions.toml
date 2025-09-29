@@ -1,12 +1,12 @@
 [versions]
-crate = "4.0.0-RC.3"
+crate = "4.0.0-RC.4"
 commandapi = "10.1.2"
-flyway = "11.10.4"
-jooq = "3.20.5"
+flyway = "11.13.2"
+jooq = "3.20.7"
 
 [libraries]
 # Core dependencies
-annotations = "org.jetbrains:annotations:26.0.2"
+annotations = "org.jetbrains:annotations:26.0.2-1"
 paper-api = "io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT"
 morepaperlib = "space.arim.morepaperlib:morepaperlib:0.4.4"
 
@@ -25,25 +25,25 @@ triumph-gui = "dev.triumphteam:triumph-gui:3.1.12"
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
 vault = "com.github.MilkBowl:VaultAPI:1.7.1"
-packetevents = "com.github.retrooper:packetevents-spigot:2.9.4"
+packetevents = "com.github.retrooper:packetevents-spigot:2.9.5"
 placeholderapi = "me.clip:placeholderapi:2.11.6"
 
 # Database dependencies
-hikaricp = "com.zaxxer:HikariCP:6.3.2"
+hikaricp = "com.zaxxer:HikariCP:7.0.2"
 flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
 flyway-mysql = { module = "org.flywaydb:flyway-mysql", version.ref = "flyway" }
 jooq = { module = "org.jooq:jooq", version.ref = "jooq" }
-jakarta = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.2" # Compiler bug, see: https://github.com/jOOQ/jOOQ/issues/14865#issuecomment-2077182512
+jakarta = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.4" # Compiler bug, see: https://github.com/jOOQ/jOOQ/issues/14865#issuecomment-2077182512
 
 # JDBC drivers
-h2 = "com.h2database:h2:2.3.232"
+h2 = "com.h2database:h2:2.4.240"
 sqlite = "org.xerial:sqlite-jdbc:3.50.3.0"
-mysql = "com.mysql:mysql-connector-j:9.3.0"
-mariadb = "org.mariadb.jdbc:mariadb-java-client:3.5.4"
+mysql = "com.mysql:mysql-connector-j:9.4.0"
+mariadb = "org.mariadb.jdbc:mariadb-java-client:3.5.6"
 
 # Messaging drivers
-jedis = "redis.clients:jedis:6.0.0"
-nats = "io.nats:jnats:2.21.4"
+jedis = "redis.clients:jedis:6.2.0"
+nats = "io.nats:jnats:2.23.0"
 rabbitmq = "com.rabbitmq:amqp-client:5.26.0"
 
 # Testing
@@ -66,9 +66,9 @@ junit = ["junit-jupiter", "junit-platform"]
 testcontainers = ["testcontainers-jupiter", "testcontainers-mysql", "testcontainers-mariadb", "testcontainers-redis", "testcontainers-rabbitmq"]
 
 [plugins]
-shadow = "com.gradleup.shadow:8.3.8"
-run-paper = "xyz.jpenilla.run-paper:2.3.1"
-plugin-yml = "de.eldoria.plugin-yml.bukkit:0.7.1"
+shadow = "com.gradleup.shadow:9.2.2"
+run-paper = "xyz.jpenilla.run-paper:3.0.0"
+plugin-yml = "de.eldoria.plugin-yml.bukkit:v0.8.0"
 paperweight = "io.papermc.paperweight.userdev:1.7.7"
 flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
 jooq = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }

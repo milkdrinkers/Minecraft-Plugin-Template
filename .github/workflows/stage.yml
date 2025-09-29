@@ -52,7 +52,7 @@ jobs:
     runs-on: ${{ inputs.os }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 1 # Shallow clone for faster checkout
 
@@ -111,7 +111,7 @@ jobs:
       # Checkout repository
       - name: Checkout Repository
         if: ${{ !contains(github.ref_name, inputs.prerelease_suffix) }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 1 # Shallow clone for faster checkout
 
@@ -137,7 +137,7 @@ jobs:
     runs-on: ${{ inputs.os }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 1 # Shallow clone for faster checkout
 
