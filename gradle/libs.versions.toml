@@ -20,7 +20,7 @@ colorparser = "io.github.milkdrinkers:colorparser-paper:4.0.0-RC.1"
 threadutil-bukkit = "io.github.milkdrinkers:threadutil-bukkit:1.2.0"
 commandapi-shade = { module = "dev.jorel:commandapi-bukkit-shade", version.ref = "commandapi" }
 commandapi-annotations = { module = "dev.jorel:commandapi-annotations", version.ref = "commandapi" }
-triumph-gui = "dev.triumphteam:triumph-gui:3.1.12"
+triumph-gui = "dev.triumphteam:triumph-gui:3.1.13"
 
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
