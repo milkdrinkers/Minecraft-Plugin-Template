@@ -16,7 +16,7 @@ versionwatch = "io.github.milkdrinkers:versionwatch:1.0.2"
 wordweaver = "io.github.milkdrinkers:wordweaver:0.0.7"
 crate-api = { module = "io.github.milkdrinkers:crate-api", version.ref = "crate" }
 crate-yaml = { module = "io.github.milkdrinkers:crate-yaml", version.ref = "crate" }
-colorparser = "io.github.milkdrinkers:colorparser-paper:4.0.0-RC.1"
+colorparser = "io.github.milkdrinkers:colorparser-paper:4.1.0"
 threadutil-bukkit = "io.github.milkdrinkers:threadutil-bukkit:1.2.0"
 commandapi-shade = { module = "dev.jorel:commandapi-bukkit-shade", version.ref = "commandapi" }
 commandapi-annotations = { module = "dev.jorel:commandapi-annotations", version.ref = "commandapi" }
