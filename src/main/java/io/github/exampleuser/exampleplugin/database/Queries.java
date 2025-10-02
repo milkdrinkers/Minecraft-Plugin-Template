@@ -269,7 +269,7 @@ public final class Queries {
                     )
                     .orderBy(MESSAGING.ID.asc())
                     .fetch()
-                    .intoMap(MESSAGING.ID, r -> BidirectionalMessage.from(r.getMessage()));
+                    .intoMap(MESSAGING.ID, r -> Message.from(r.getMessage()));
             } catch (SQLException e) {
                 Logger.get().error("SQL Query threw an error!" + e);
                 return Map.of();
