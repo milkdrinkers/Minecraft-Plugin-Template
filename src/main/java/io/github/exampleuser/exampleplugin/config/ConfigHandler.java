@@ -23,8 +23,14 @@ public class ConfigHandler implements Reloadable {
 
     @Override
     public void onLoad(ExamplePlugin plugin) {
-        cfg = new Config("config", plugin.getDataFolder().getPath(), plugin.getResource("config.yml")); // Create a config file from the template in our resources folder
-        databaseCfg = new Config("database", plugin.getDataFolder().getPath(), plugin.getResource("database.yml"));
+        cfg = Config.builderConfig()
+            .path(plugin.getDataFolder().toPath().resolve("config.yml"))
+            .defaults(plugin.getResource("config.yml"))
+            .build(); // Create a config file from the template in our resources folder
+        databaseCfg = Config.builderConfig()
+            .path(plugin.getDataFolder().toPath().resolve("database.yml"))
+            .defaults(plugin.getResource("database.yml"))
+            .build();
     }
 
     @Override
