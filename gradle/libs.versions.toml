@@ -47,7 +47,7 @@ nats = "io.nats:jnats:2.23.0"
 rabbitmq = "com.rabbitmq:amqp-client:5.26.0"
 
 # Testing
-junit-bom = "org.junit:junit-bom:5.13.4"
+junit-bom = "org.junit:junit-bom:6.0.0"
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-platform = { module = "org.junit.platform:junit-platform-launcher" }
 slf4j = "org.slf4j:slf4j-simple:2.0.17"
