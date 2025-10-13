@@ -125,7 +125,7 @@ jobs:
       # Commit and push updated version properties file
       - name: Update repository
         if: ${{ !contains(github.ref_name, inputs.prerelease_suffix) }}
-        uses: stefanzweifel/git-auto-commit-action@v6
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore: bump version to ${{ github.ref_name }}"
           branch: ${{ github.event.repository.default_branch }}
