@@ -206,8 +206,8 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     prefix = project.name
     version = "${project.version}"
     description = "${project.description}"
-    authors = listOf("GITHUB_USERNAME")
-    contributors = listOf()
+    authors = project.authors
+    contributors = project.contributors
     apiVersion = "1.21"
     foliaSupported = true // Mark plugin as supporting Folia
 
