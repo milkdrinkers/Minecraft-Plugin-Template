@@ -158,8 +158,10 @@ tasks {
         reloc("io.github.milkdrinkers.crate", "crate")
         reloc("io.github.milkdrinkers.colorparser", "colorparser")
         reloc("io.github.milkdrinkers.threadutil", "threadutil")
+        reloc("org.snakeyaml", "snakeyaml")
+        reloc("org.json", "json")
         reloc("dev.jorel.commandapi", "commandapi")
-        reloc("dev.triumphteam.gui", "gui")
+        reloc("dev.triumphteam.gui", "triumphgui")
         reloc("com.zaxxer.hikari", "hikaricp")
         reloc("org.bstats", "bstats")
 
