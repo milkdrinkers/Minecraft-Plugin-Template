@@ -1,3 +1,4 @@
+import net.minecrell.pluginyml.paper.PaperPluginDescription
 import org.jooq.meta.jaxb.Logging
 
 plugins {
@@ -5,8 +6,8 @@ plugins {
 
     alias(libs.plugins.shadow) // Shades and relocates dependencies, see https://gradleup.com/shadow/
     alias(libs.plugins.run.paper) // Built in test server using runServer and runMojangMappedServer tasks
-    alias(libs.plugins.plugin.yml) // Automatic plugin.yml generation
-    //alias(libs.plugins.paperweight) // Used to develop internal plugins using Mojang mappings, See https://github.com/PaperMC/paperweight
+    alias(libs.plugins.plugin.yml.bukkit) // Automatic plugin.yml generation
+    alias(libs.plugins.plugin.yml.paper) // Automatic plugin.yml generation    //alias(libs.plugins.paperweight) // Used to develop internal plugins using Mojang mappings, See https://github.com/PaperMC/paperweight
     alias(libs.plugins.flyway) // Database migrations
     alias(libs.plugins.jooq) // Database ORM
     flywaypatches
@@ -208,14 +209,50 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     description = "${project.description}"
     authors = project.authors
     contributors = project.contributors
-    foliaSupported = true // Mark plugin as supporting Folia
     apiVersion = libs.versions.paper.api.get().substringBefore("-R")
+    foliaSupported = true
 
     // Misc properties
     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD // STARTUP or POSTWORLD
     depend = listOf()
     softDepend = listOf("PacketEvents", "Vault", "PlaceholderAPI")
     loadBefore = listOf()
+    provides = listOf()
+}
+
+paper { // Options: https://github.com/eldoriarpg/plugin-yml/wiki/Paper
+    main = project.entryPointClass
+    loader = project.entryPointClass + "PluginLoader"
+    generateLibrariesJson = true
+    load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD
+
+    // Info
+    name = project.name
+    prefix = project.name
+    version = "${project.version}"
+    description = "${project.description}"
+    authors = project.authors
+    contributors = project.contributors
+    apiVersion = libs.versions.paper.api.get().substringBefore("-R")
+    foliaSupported = false
+
+    // Dependencies
+    hasOpenClassloader = true
+    bootstrapDependencies {}
+    serverDependencies {
+        register("PacketEvents") {
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+            required = false
+        }
+        register("Vault") {
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+            required = false
+        }
+        register("PlaceholderAPI") {
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+            required = false
+        }
+    }
     provides = listOf()
 }
 
