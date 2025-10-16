@@ -51,12 +51,12 @@ junit-bom = "org.junit:junit-bom:6.0.0"
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-platform = { module = "org.junit.platform:junit-platform-launcher" }
 slf4j = "org.slf4j:slf4j-simple:2.0.17"
-testcontainers-bom = "org.testcontainers:testcontainers-bom:1.21.3"
-testcontainers-jupiter = { module = "org.testcontainers:junit-jupiter" }
-testcontainers-mysql = { module = "org.testcontainers:mysql" }
-testcontainers-mariadb = { module = "org.testcontainers:mariadb" }
+testcontainers-bom = "org.testcontainers:testcontainers-bom:2.0.0"
+testcontainers-jupiter = { module = "org.testcontainers:testcontainers-junit-jupiter" }
+testcontainers-mysql = { module = "org.testcontainers:testcontainers-mysql" }
+testcontainers-mariadb = { module = "org.testcontainers:testcontainers-mariadb" }
 testcontainers-redis = { module = "com.redis:testcontainers-redis", version = "2.2.4" }
-testcontainers-rabbitmq = { module = "org.testcontainers:rabbitmq" }
+testcontainers-rabbitmq = { module = "org.testcontainers:testcontainers-rabbitmq" }
 
 [bundles]
 flyway = ["flyway-core", "flyway-mysql"]
