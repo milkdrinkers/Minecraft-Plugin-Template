@@ -48,7 +48,7 @@ dependencies {
     // Core dependencies
     compileOnly(libs.annotations)
     annotationProcessor(libs.annotations)
-    //paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT") // Use instead of the `paper-api` entry if developing plugins using Mojang mappings
+//    paperweight.paperDevBundle(libs.paper.api.get().version.toString()) // Use instead of the `paper-api` entry if developing plugins using Mojang mappings
     compileOnly(libs.paper.api)
     implementation(libs.morepaperlib)
 
@@ -175,7 +175,7 @@ tasks {
 
     runServer {
         // Configure the Minecraft version for our task.
-        minecraftVersion("1.21")
+        minecraftVersion(libs.versions.paper.run.get())
 
         // IntelliJ IDEA debugger setup: https://docs.papermc.io/paper/dev/debugging#using-a-remote-debugger
         jvmArgs("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", "-DPaper.IgnoreJavaVersion=true", "-Dcom.mojang.eula.agree=true", "-DIReallyKnowWhatIAmDoingISwear", "-Dpaper.playerconnection.keepalive=6000")
@@ -208,8 +208,8 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     description = "${project.description}"
     authors = project.authors
     contributors = project.contributors
-    apiVersion = "1.21"
     foliaSupported = true // Mark plugin as supporting Folia
+    apiVersion = libs.versions.paper.api.get().substringBefore("-R")
 
     // Misc properties
     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD // STARTUP or POSTWORLD
