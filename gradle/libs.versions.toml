@@ -27,7 +27,7 @@ triumph-gui = "dev.triumphteam:triumph-gui:3.1.13"
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
 vault = "com.github.MilkBowl:VaultAPI:1.7.1"
-packetevents = "com.github.retrooper:packetevents-spigot:2.9.5"
+packetevents = "com.github.retrooper:packetevents-spigot:2.10.0"
 placeholderapi = "me.clip:placeholderapi:2.11.6"
 
 # Database dependencies
