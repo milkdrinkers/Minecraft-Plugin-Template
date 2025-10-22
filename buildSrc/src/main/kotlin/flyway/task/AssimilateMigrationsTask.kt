@@ -1,10 +1,9 @@
+package flyway.task
+
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.tasks.InputDirectory
-import org.gradle.api.tasks.OutputDirectory
-import org.gradle.api.tasks.PathSensitive
-import org.gradle.api.tasks.PathSensitivity
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.tasks.*
 import java.io.File
 
 /**
@@ -16,27 +15,18 @@ import java.io.File
  * 3. Copy non-clashing common migrations to the temp dir (Common migrations are overridden by RDBMS specific migrations)
  */
 abstract class AssimilateMigrationsTask : DefaultTask() {
-    companion object {
-        private const val DEFAULT_MIGRATION_PATH = "src/main/resources/db/migration"
-        private const val SQL_EXTENSION = "sql"
-    }
-
-    // Flyway migration sources
     @get:InputDirectory
     @get:PathSensitive(PathSensitivity.RELATIVE)
     abstract val resourceMigrationDir: DirectoryProperty
+
+    @get:Input
+    abstract val sqlMigrationSuffixes: ListProperty<String>
 
     @get:OutputDirectory
     abstract val outputDir: DirectoryProperty
 
     init {
-        // Set default values using convention
-        resourceMigrationDir.convention(
-            project.layout.projectDirectory.dir(DEFAULT_MIGRATION_PATH)
-        )
-        outputDir.convention(
-            project.layout.buildDirectory.dir("tmp/assimilateMigrations")
-        )
+        sqlMigrationSuffixes.convention(listOf(".sql"))
     }
 
     @TaskAction
@@ -46,7 +36,7 @@ abstract class AssimilateMigrationsTask : DefaultTask() {
 
         // Validate input directory exists
         if (!inputDir.exists()) {
-            logger.warn("Migration directory does not exist: ${inputDir.absolutePath}")
+            logger.error("Migration directory does not exist: ${inputDir.absolutePath}")
             return
         }
 
@@ -56,7 +46,7 @@ abstract class AssimilateMigrationsTask : DefaultTask() {
 
         // Get all common migrations from the resource directory
         val commonMigrations = inputDir.walkTopDown()
-            .filter { it.isFile && it.extension == SQL_EXTENSION }
+            .filter { it.isFile && sqlMigrationSuffixes.get().any { s -> it.extension == s.removePrefix(".") } }
             .associateBy { it.name }
 
         logger.info("Found ${commonMigrations.size} common migrations")
@@ -71,6 +61,9 @@ abstract class AssimilateMigrationsTask : DefaultTask() {
         logger.info("Assimilated migrations for ${rdbmsDirectories.size} RDBMS types")
     }
 
+    /**
+     * Copies all migrations to the outputDir excluding non-clashing migrations
+     */
     private fun processRdbmsDirectory(
         rdbmsDir: File,
         commonMigrations: Map<String, File>,
@@ -78,14 +71,14 @@ abstract class AssimilateMigrationsTask : DefaultTask() {
     ) {
         val rdbmsName = rdbmsDir.name
         val specificMigrations = rdbmsDir.walkTopDown()
-            .filter { it.isFile && it.extension == SQL_EXTENSION }
+            .filter { it.isFile && sqlMigrationSuffixes.get().any { s -> it.extension == s.removePrefix(".") } }
             .associateBy { it.name }
 
         val allVersions = (commonMigrations.keys + specificMigrations.keys).toSet()
         val rdbmsOutputDir = outputDir.resolve(rdbmsName)
         rdbmsOutputDir.mkdirs()
 
-        logger.info("Processing $rdbmsName: ${specificMigrations.size} specific, ${commonMigrations.size} common migrations")
+        logger.debug("Processing $rdbmsName: ${specificMigrations.size} specific, ${commonMigrations.size} common migrations")
 
         // Copy migration files with priority: specific > common
         allVersions.forEach { fileName ->

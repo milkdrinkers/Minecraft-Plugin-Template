@@ -8,9 +8,8 @@ plugins {
     alias(libs.plugins.run.paper) // Built in test server using runServer and runMojangMappedServer tasks
     alias(libs.plugins.plugin.yml.bukkit) // Automatic plugin.yml generation
     alias(libs.plugins.plugin.yml.paper) // Automatic plugin.yml generation    //alias(libs.plugins.paperweight) // Used to develop internal plugins using Mojang mappings, See https://github.com/PaperMC/paperweight
-    alias(libs.plugins.flyway) // Database migrations
     alias(libs.plugins.jooq) // Database ORM
-    flywaypatches
+    flyway
     projectextensions
     versioner
 
@@ -80,6 +79,7 @@ dependencies {
     // Database dependencies - Core
     implementation(libs.hikaricp)
     library(libs.bundles.flyway)
+    flywayDriver(libs.h2)
     compileOnly(libs.jakarta) // Compiler bug, see: https://github.com/jOOQ/jOOQ/issues/14865#issuecomment-2077182512
     library(libs.jooq)
     jooqCodegen(libs.h2)
@@ -257,18 +257,21 @@ paper { // Options: https://github.com/eldoriarpg/plugin-yml/wiki/Paper
 }
 
 flyway {
-    url = "jdbc:h2:${project.layout.buildDirectory.get()}/generated/flyway/db;AUTO_SERVER=TRUE;MODE=MySQL;CASE_INSENSITIVE_IDENTIFIERS=TRUE;IGNORECASE=TRUE"
+    url = provider {
+        "jdbc:h2:${project.layout.buildDirectory.get()}/generated/flyway/db;AUTO_SERVER=TRUE;MODE=MySQL;CASE_INSENSITIVE_IDENTIFIERS=TRUE;IGNORECASE=TRUE"
+    }
     user = "sa"
     password = ""
-    schemas = listOf("PUBLIC").toTypedArray()
+    schemas = listOf("PUBLIC")
     placeholders = mapOf( // Substitute placeholders for flyway
         "tablePrefix" to "",
     )
     validateMigrationNaming = true
     baselineOnMigrate = true
     cleanDisabled = false
-    locations = arrayOf(
-        "filesystem:${project.tasks.named<AssimilateMigrationsTask>("assimilateMigrations").get().outputDir.get().dir("h2")}",
+    enableRdbmsSpecificMigrations = true
+    locations = listOf(
+        "filesystem:${project.layout.projectDirectory}/src/main/resources/db/migration/",
         "classpath:${mainPackage.replace(".", "/")}/database/migration/migrations"
     )
 }
@@ -278,9 +281,9 @@ jooq {
         logging = Logging.ERROR
         jdbc {
             driver = "org.h2.Driver"
-            url = flyway.url
-            user = flyway.user
-            password = flyway.password
+            url = flyway.url.get()
+            user = flyway.user.get()
+            password = flyway.password.get()
         }
         generator {
             database {

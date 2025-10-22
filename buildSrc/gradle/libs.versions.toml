@@ -1,0 +1,2 @@
+[libraries]
+flyway = { module = "org.flywaydb:flyway-core", version = "11.14.1" }

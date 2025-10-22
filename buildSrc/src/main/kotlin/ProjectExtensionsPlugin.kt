@@ -1,8 +1,6 @@
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.internal.extensions.core.extra
-import kotlin.text.isBlank
-import kotlin.text.split
 
 /**
  * Utility plugin to add common project extensions methods.

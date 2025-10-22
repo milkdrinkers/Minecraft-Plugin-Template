@@ -12,6 +12,7 @@ dependencies {
     implementation(gradleApi())
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("script-runtime"))
+    implementation(libs.flyway)
 }
 
 gradlePlugin {
@@ -28,9 +29,9 @@ gradlePlugin {
         }
     }
     plugins {
-        create("flywaypatches") {
-            id = "flywaypatches"
-            implementationClass = "FlywayPatchesPlugin"
+        create("flyway") {
+            id = "flyway"
+            implementationClass = "flyway.FlywayPlugin"
         }
     }
 }
