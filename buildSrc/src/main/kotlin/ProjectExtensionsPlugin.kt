@@ -5,6 +5,7 @@ import org.gradle.internal.extensions.core.extra
 /**
  * Utility plugin to add common project extensions methods.
  */
+@Suppress("unused")
 abstract class ProjectExtensionsPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.extra["mainPackage"] = getMainPackage(project)
