@@ -27,7 +27,7 @@ triumph-gui = "dev.triumphteam:triumph-gui:3.1.13"
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
 vault = "com.github.MilkBowl:VaultAPI:1.7.1"
-packetevents = "com.github.retrooper:packetevents-spigot:2.9.5"
+packetevents = "com.github.retrooper:packetevents-spigot:2.10.0"
 placeholderapi = "me.clip:placeholderapi:2.11.6"
 
 # Database dependencies
@@ -40,7 +40,7 @@ jakarta = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.4" # Compiler bug, see: htt
 # JDBC drivers
 h2 = "com.h2database:h2:2.4.240"
 sqlite = "org.xerial:sqlite-jdbc:3.50.3.0"
-mysql = "com.mysql:mysql-connector-j:9.4.0"
+mysql = "com.mysql:mysql-connector-j:9.5.0"
 mariadb = "org.mariadb.jdbc:mariadb-java-client:3.5.6"
 
 # Messaging drivers

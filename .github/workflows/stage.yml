@@ -93,7 +93,7 @@ jobs:
 
       # Upload the snapshot artifacts
       - name: Upload Snapshot Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Snapshot-${{ github.run_number }}
           path: ${{ github.workspace }}/build/libs/
@@ -175,7 +175,7 @@ jobs:
           subject-path: "${{ github.workspace }}/build/libs/*"
 
       - name: Upload Release Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Release
           path: ${{ github.workspace }}/build/libs/
