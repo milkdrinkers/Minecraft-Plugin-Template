@@ -3,7 +3,7 @@ paper-api = "1.21.10-R0.1-SNAPSHOT"
 paper-run = "1.21.10"
 crate = "4.0.0-RC.5"
 commandapi = "10.1.2"
-flyway = "11.14.1"
+flyway = "11.15.0"
 jooq = "3.20.8"
 
 [libraries]
@@ -27,7 +27,7 @@ triumph-gui = "dev.triumphteam:triumph-gui:3.1.13"
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
 vault = "com.github.MilkBowl:VaultAPI:1.7.1"
-packetevents = "com.github.retrooper:packetevents-spigot:2.9.5"
+packetevents = "com.github.retrooper:packetevents-spigot:2.10.0"
 placeholderapi = "me.clip:placeholderapi:2.11.6"
 
 # Database dependencies
@@ -40,7 +40,7 @@ jakarta = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.4" # Compiler bug, see: htt
 # JDBC drivers
 h2 = "com.h2database:h2:2.4.240"
 sqlite = "org.xerial:sqlite-jdbc:3.50.3.0"
-mysql = "com.mysql:mysql-connector-j:9.4.0"
+mysql = "com.mysql:mysql-connector-j:9.5.0"
 mariadb = "org.mariadb.jdbc:mariadb-java-client:3.5.6"
 
 # Messaging drivers
@@ -49,7 +49,7 @@ nats = "io.nats:jnats:2.23.0"
 rabbitmq = "com.rabbitmq:amqp-client:5.27.0"
 
 # Testing
-junit-bom = "org.junit:junit-bom:6.0.0"
+junit-bom = "org.junit:junit-bom:6.0.1"
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-platform = { module = "org.junit.platform:junit-platform-launcher" }
 slf4j = "org.slf4j:slf4j-simple:2.0.17"
