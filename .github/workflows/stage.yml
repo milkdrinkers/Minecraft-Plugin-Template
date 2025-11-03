@@ -67,7 +67,7 @@ jobs:
       # Get version field in project properties file for snapshot version
       - name: Get Project Version
         id: version
-        uses: ./.github/actions/version
+        uses: ./.github/actions/getversion
         with:
           snapshot_suffix: ${{ inputs.snapshot_suffix }}
 
@@ -118,7 +118,7 @@ jobs:
       # Update version field in project properties file
       - name: Update Project Version
         if: ${{ !contains(github.ref_name, inputs.prerelease_suffix) }}
-        uses: ./.github/actions/updateversion
+        uses: ./.github/actions/setversion
         with:
           version: ${{ github.ref_name }}
 

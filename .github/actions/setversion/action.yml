@@ -10,7 +10,7 @@ runs:
   using: 'composite'
   steps:
     # Update version field in project properties file
-    - name: Get Project Version
+    - name: Set Project Version
       id: version
       shell: bash
       run: |
