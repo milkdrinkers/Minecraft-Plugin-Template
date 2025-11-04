@@ -12,6 +12,7 @@ dependencies {
     implementation(gradleApi())
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("script-runtime"))
+    implementation(libs.jgit)
     implementation(libs.flyway)
 }
 
@@ -23,9 +24,9 @@ gradlePlugin {
         }
     }
     plugins {
-        create("versioner") {
-            id = "versioner"
-            implementationClass = "VersionerPlugin"
+        create("versioning") {
+            id = "versioning"
+            implementationClass = "versioning.VersioningPlugin"
         }
     }
     plugins {

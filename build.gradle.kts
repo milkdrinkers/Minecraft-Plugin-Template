@@ -11,7 +11,7 @@ plugins {
     alias(libs.plugins.jooq) // Database ORM
     flyway
     projectextensions
-    versioner
+    versioning
 
     eclipse
     idea
@@ -28,9 +28,6 @@ repositories {
 
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://mvn-repo.arim.space/lesser-gpl3/")
-
-    maven("https://maven.athyrium.eu/releases")
-
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/") // PlaceholderAPI
     maven("https://repo.codemc.org/repository/maven-public/") {
         content {
