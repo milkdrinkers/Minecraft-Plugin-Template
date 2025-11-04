@@ -1,6 +1,6 @@
 package io.github.exampleuser.exampleplugin.command;
 
-import dev.jorel.commandapi.CommandAPIBukkit;
+import dev.jorel.commandapi.CommandAPIPaper;
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.StringArgument;
@@ -67,21 +67,21 @@ final class TranslationCommand {
         final String node = args.getByClassOrDefault("key", String.class, "");
 
         if (node == null)
-            throw CommandAPIBukkit.failWithAdventureComponent(Translation.as("commands.translation.test.not-string"));
+            throw CommandAPIPaper.failWithAdventureComponent(Translation.as("commands.translation.test.not-string"));
 
         if (node.isBlank())
-            throw CommandAPIBukkit.failWithAdventureComponent(ColorParser.of(Translation.of("commands.translation.test.not-empty")).with("node", node).build());
+            throw CommandAPIPaper.failWithAdventureComponent(ColorParser.of(Translation.of("commands.translation.test.not-empty")).with("node", node).build());
 
         if (node.startsWith(".") || node.endsWith("."))
-            throw CommandAPIBukkit.failWithAdventureComponent(ColorParser.of(Translation.of("commands.translation.test.illegal")).with("node", node).build());
+            throw CommandAPIPaper.failWithAdventureComponent(ColorParser.of(Translation.of("commands.translation.test.illegal")).with("node", node).build());
 
         final String translation = Translation.of(node);
 
         if (translation == null)
-            throw CommandAPIBukkit.failWithAdventureComponent(ColorParser.of(Translation.of("commands.translation.test.not-found")).with("node", node).build());
+            throw CommandAPIPaper.failWithAdventureComponent(ColorParser.of(Translation.of("commands.translation.test.not-found")).with("node", node).build());
 
         if (translation.isBlank())
-            throw CommandAPIBukkit.failWithAdventureComponent(ColorParser.of(Translation.of("commands.translation.test.not-empty2")).with("node", node).build());
+            throw CommandAPIPaper.failWithAdventureComponent(ColorParser.of(Translation.of("commands.translation.test.not-empty2")).with("node", node).build());
 
         if (sender instanceof Player player) {
             sender.sendMessage(

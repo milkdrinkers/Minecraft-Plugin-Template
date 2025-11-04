@@ -1,7 +1,7 @@
 package io.github.exampleuser.exampleplugin.command;
 
 import dev.jorel.commandapi.CommandAPI;
-import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import dev.jorel.commandapi.CommandAPIPaperConfig;
 import io.github.exampleuser.exampleplugin.ExamplePlugin;
 import io.github.exampleuser.exampleplugin.Reloadable;
 
@@ -24,10 +24,8 @@ public class CommandHandler implements Reloadable {
     @Override
     public void onLoad(ExamplePlugin plugin) {
         CommandAPI.onLoad(
-            new CommandAPIBukkitConfig(plugin)
-                .shouldHookPaperReload(true)
+            new CommandAPIPaperConfig(plugin)
                 .silentLogs(true)
-                .beLenientForMinorVersions(true)
         );
     }
 

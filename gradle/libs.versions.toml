@@ -2,7 +2,7 @@
 paper-api = "1.21.10-R0.1-SNAPSHOT"
 paper-run = "1.21.10"
 crate = "4.0.0-RC.5"
-commandapi = "10.1.2"
+commandapi = "11.0.0"
 flyway = "11.15.0"
 jooq = "3.20.8"
 
@@ -20,8 +20,8 @@ crate-api = { module = "io.github.milkdrinkers:crate-api", version.ref = "crate"
 crate-yaml = { module = "io.github.milkdrinkers:crate-yaml", version.ref = "crate" }
 colorparser = "io.github.milkdrinkers:colorparser-paper:4.1.0"
 threadutil-bukkit = "io.github.milkdrinkers:threadutil-bukkit:1.4.0"
-commandapi-shade = { module = "dev.jorel:commandapi-bukkit-shade", version.ref = "commandapi" }
-commandapi-annotations = { module = "dev.jorel:commandapi-annotations", version.ref = "commandapi" }
+commandapi-shade = { module = "dev.jorel:commandapi-paper-shade", version.ref = "commandapi" }
+commandapi-annotations = { module = "dev.jorel:commandapi-paper-annotations", version.ref = "commandapi" }
 triumph-gui = "dev.triumphteam:triumph-gui:3.1.13"
 
 # Plugin dependencies
