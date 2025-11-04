@@ -17,9 +17,12 @@ import java.util.Map;
  */
 public enum DatabaseType {
     /**
-     * SQLite database type.
+     * H2 database type.
      */
     H2("H2", org.h2.Driver.class.getName(), JdbcDataSource.class.getName(), "h2", ';', ';'),
+    /**
+     * SQLite database type.
+     */
     SQLITE("SQLite", JDBC.class.getName(), SQLiteDataSource.class.getName(), "sqlite", '?', '&'),
     /**
      * MySQL database type.

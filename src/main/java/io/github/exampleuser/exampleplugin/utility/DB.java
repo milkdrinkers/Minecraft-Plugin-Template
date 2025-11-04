@@ -1,8 +1,8 @@
 package io.github.exampleuser.exampleplugin.utility;
 
 import io.github.exampleuser.exampleplugin.database.handler.DatabaseHandler;
-import io.github.exampleuser.exampleplugin.database.handler.DatabaseType;
 import io.github.exampleuser.exampleplugin.database.jooq.JooqContext;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jooq.DSLContext;
 
@@ -34,25 +34,27 @@ public final class DB {
     /**
      * Used to set the globally used database handler instance for the plugin
      */
+    @ApiStatus.Internal
     public static void init(DatabaseHandler handler) {
         getInstance().setDatabaseHandler(handler);
     }
 
     /**
-     * Convenience method for {@link DatabaseHandler#isReady()}
+     * Convenience method for {@link DatabaseHandler#isStarted()}
      *
      * @return if the database is ready
      */
-    public static boolean isReady() {
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static boolean isStarted() {
         DatabaseHandler handler = getInstance().getDatabaseHandler();
         if (handler == null)
             return false;
 
-        return handler.isReady();
+        return handler.isStarted();
     }
 
     /**
-     * Convenience method for {@link DatabaseHandler#getConnection} to getConnection {@link Connection}
+     * Convenience method for {@link DatabaseHandler#getConnection} to get a {@link Connection}
      *
      * @return the connection
      * @throws SQLException the sql exception
@@ -81,14 +83,5 @@ public final class DB {
     @NotNull
     public static DatabaseHandler getHandler() {
         return getInstance().getDatabaseHandler();
-    }
-
-    /**
-     * Convenience method for {@link DatabaseHandler#getDB()} to getConnection {@link DatabaseType}
-     *
-     * @return the database
-     */
-    public static DatabaseType getDB() {
-        return getInstance().getDatabaseHandler().getDB();
     }
 }

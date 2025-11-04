@@ -22,7 +22,7 @@ public final class JooqContext {
     private static final Pattern MATCH_ALL_EXCEPT_INFORMATION_SCHEMA = Pattern.compile("^(?!INFORMATION_SCHEMA)(.*?)$");
     private static final Pattern MATCH_ALL = Pattern.compile("^(.*?)$");
     private final SQLDialect dialect;
-    private final String replacement; //
+    private final String replacement;
 
     /**
      * Instantiates a new Jooq context.

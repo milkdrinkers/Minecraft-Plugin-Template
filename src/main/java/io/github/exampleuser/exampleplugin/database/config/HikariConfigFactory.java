@@ -1,7 +1,6 @@
-package io.github.exampleuser.exampleplugin.database.pool;
+package io.github.exampleuser.exampleplugin.database.config;
 
 import com.zaxxer.hikari.HikariConfig;
-import io.github.exampleuser.exampleplugin.database.config.DatabaseConfig;
 import io.github.exampleuser.exampleplugin.database.exception.DatabaseInitializationException;
 import io.github.exampleuser.exampleplugin.database.handler.DatabaseType;
 
@@ -10,14 +9,22 @@ import java.util.Optional;
 
 import static io.github.exampleuser.exampleplugin.database.handler.DatabaseType.SQLITE;
 
-public final class ConnectionPoolConfigFactory {
-    public static HikariConfig get() throws DatabaseInitializationException {
-        return get(DatabaseConfig.builder().build());
-    }
-
+/**
+ * Factory class for creating HikariCP connection pool configurations based on the provided DatabaseConfig.
+ * This class is responsible for setting up the connection pool parameters such as JDBC URL, username, password,
+ * and other pool settings based on the type of database being used.
+ */
+public final class HikariConfigFactory {
+    /**
+     * Creates a HikariConfig based on the provided DatabaseConfig.
+     *
+     * @param config the database configuration
+     * @return a HikariConfig instance configured for the specified database
+     * @throws DatabaseInitializationException if there is an error during initialization
+     */
+    @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
     public static HikariConfig get(DatabaseConfig config) throws DatabaseInitializationException {
-        HikariConfig hikariConfig = new HikariConfig();
-
+        final HikariConfig hikariConfig = new HikariConfig();
         final DatabaseType databaseType = config.getDatabaseType();
 
         // Create RDBMS specific jdbc url
@@ -68,8 +75,8 @@ public final class ConnectionPoolConfigFactory {
 
         // Set database driver class and jdbc url
         try {
-            Class.forName(databaseType.getDataSourceClassName());
-        } catch (ClassNotFoundException e) {
+            Class.forName(databaseType.getDataSourceClassName()); // Load the JDBC driver class
+        } catch (LinkageError | ClassNotFoundException e) {
             throw new DatabaseInitializationException("Failed to initialise jdbc driver!", e);
         }
         hikariConfig.setDataSourceClassName(databaseType.getDataSourceClassName());

@@ -6,11 +6,11 @@ import io.github.exampleuser.exampleplugin.ExamplePlugin;
 import io.github.exampleuser.exampleplugin.Reloadable;
 import io.github.exampleuser.exampleplugin.config.ConfigHandler;
 import io.github.exampleuser.exampleplugin.database.config.DatabaseConfig;
+import io.github.exampleuser.exampleplugin.database.config.HikariConfigFactory;
 import io.github.exampleuser.exampleplugin.database.exception.DatabaseInitializationException;
 import io.github.exampleuser.exampleplugin.database.exception.DatabaseMigrationException;
 import io.github.exampleuser.exampleplugin.database.jooq.JooqContext;
-import io.github.exampleuser.exampleplugin.database.migration.MigrationHandler;
-import io.github.exampleuser.exampleplugin.database.pool.ConnectionPoolFactory;
+import io.github.exampleuser.exampleplugin.database.migration.FlywayManager;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.TestOnly;
@@ -19,11 +19,13 @@ import org.slf4j.Logger;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
- * Class that handles HikariCP connection pool, jOOQ and Flyway migrations.
+ * A class handling/managing the implementation & lifecycle of the database service (HikariCP connection pool, jOOQ and Flyway migrations).
  */
-public class DatabaseHandler extends AbstractService implements Reloadable {
+public final class DatabaseHandler extends AbstractService implements Reloadable {
+    private static final String LOG_PREFIX = "[Database] ";
     private final Logger logger;
     private JooqContext jooqContext;
     private HikariDataSource connectionPool;
@@ -33,10 +35,10 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
     /**
      * Instantiates a new Database handler.
      *
-     * @param logger        the logger
+     * @param logger the logger
      */
-    private DatabaseHandler(Logger logger, boolean migrateOnStartup) {
-        this.logger = logger;
+    private DatabaseHandler(@NotNull Logger logger, boolean migrateOnStartup) {
+        this.logger = Objects.requireNonNull(logger, "Logger cannot be null");
         this.migrateOnStartup = migrateOnStartup;
     }
 
@@ -44,12 +46,12 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
      * Instantiates a new Database handler.
      *
      * @param config the database config
-     * @param logger         the logger
+     * @param logger the logger
      */
     @TestOnly
-    private DatabaseHandler(@NotNull DatabaseConfig config, Logger logger, boolean migrateOnStartup) {
-        this.config = config;
-        this.logger = logger;
+    private DatabaseHandler(@NotNull DatabaseConfig config, @NotNull Logger logger, boolean migrateOnStartup) {
+        this.config = Objects.requireNonNull(config, "DatabaseConfig cannot be null");
+        this.logger = Objects.requireNonNull(logger, "Logger cannot be null");
         this.migrateOnStartup = migrateOnStartup;
     }
 
@@ -62,21 +64,10 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
             config = DatabaseConfig.fromConfig(plugin.getConfigHandler().getDatabaseConfig());
 
         try {
-            doStartup(); // Start connection pool
-        } catch (DatabaseInitializationException e) {
-            logger.error("[DB] Database initialization error: {}", e.getMessage());
-        } finally {
-            if (!isReady()) {
-                logger.warn("[DB] Error while initializing database. Functionality will be limited.");
-            }
+            doStartup();
+        } catch (Exception e) {
+            logger.error(LOG_PREFIX + "Database initialization error: {}", e.getMessage());
         }
-    }
-
-    /**
-     * On plugin enable.
-     */
-    @Override
-    public void onEnable(ExamplePlugin plugin) {
     }
 
     /**
@@ -87,17 +78,8 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
         try {
             doShutdown();
         } catch (Exception e) {
-            logger.error("[DB] Error while shutting down database:", e);
+            logger.error(LOG_PREFIX + "Error while shutting down database:", e);
         }
-    }
-
-    /**
-     * Returns if the database is setup and functioning properly.
-     *
-     * @return the boolean
-     */
-    public boolean isReady() {
-        return isStarted();
     }
 
     /**
@@ -119,19 +101,12 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
     }
 
     /**
-     * Gets connection pool.
-     *
-     * @return the connection pool
-     */
-    public HikariDataSource getConnectionPool() {
-        return connectionPool;
-    }
-
-    /**
      * Gets database config.
      *
      * @return the database config
      */
+    @NotNull
+    @ApiStatus.Internal
     public DatabaseConfig getDatabaseConfig() {
         if (config == null)
             throw new IllegalStateException("Database config is still null but was accessed in getDatabaseConfig!");
@@ -146,13 +121,14 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
      * @throws SQLException the sql exception
      */
     @NotNull
+    @ApiStatus.Internal
     public Connection getConnection() throws SQLException {
         if (connectionPool == null)
-            throw new SQLException("[DB] Unable to getConnection a connection from the pool. (connectionPool is null)");
+            throw new SQLException(LOG_PREFIX + "Unable to get a connection from the pool. (connectionPool is null)");
 
         final Connection connection = connectionPool.getConnection();
         if (connection == null)
-            throw new SQLException("[DB] Unable to getConnection a connection from the pool. (connectionPool#getConnection returned null)");
+            throw new SQLException(LOG_PREFIX + "Unable to get a connection from the pool. (connectionPool#getConnection returned null)");
 
         return connection;
     }
@@ -164,6 +140,8 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
     @Override
     @ApiStatus.Internal
     public void startup() throws DatabaseInitializationException {
+        logger.info(LOG_PREFIX + "Starting database pool...");
+
         if (config == null)
             throw new DatabaseInitializationException("Attempted to start a database connection pool but database config is null!");
 
@@ -171,30 +149,29 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
             throw new DatabaseInitializationException("Attempted to create a new database connection pool while running! (connectionPool is not null)");
 
         // Initialize connection pool
-        connectionPool = ConnectionPoolFactory.create(
-            config,
-            logger
-        );
+        try {
+            connectionPool = new HikariDataSource(HikariConfigFactory.get(config));
+        } catch (Throwable t) {
+            throw new DatabaseInitializationException("Failed to initialize database pool during startup. Are you using the correct database type?");
+        }
 
         // Check if using invalid database type (Note, these cases throw in the previous method)
-        try (Connection connection = connectionPool.getConnection()) {
-            DatabaseMetaData databaseMetaData = connection.getMetaData();
-            String vendorVersionName = databaseMetaData.getDatabaseProductVersion().toLowerCase();
+        try (final Connection connection = connectionPool.getConnection()) {
+            final DatabaseMetaData databaseMetaData = connection.getMetaData();
+            final String vendorVersionName = databaseMetaData.getDatabaseProductVersion().toLowerCase();
 
             if (vendorVersionName.contains("mariadb") && getDB().equals(DatabaseType.MYSQL)) {
-                throw new RuntimeException("Attempted to connect to a mariadb database using mysql as database type! (Please change the type to mariadb in database.yml)");
+                throw new DatabaseInitializationException("Attempted to connect to a mariadb database using mysql as database type! (Please change the type to mariadb in database.yml)");
             } else if (vendorVersionName.contains("mysql") && getDB().equals(DatabaseType.MARIADB)) {
-                throw new RuntimeException("Attempted to connect to a mysql database using mariadb as database type! (Please change the type to mysql in database.yml)");
+                throw new DatabaseInitializationException("Attempted to connect to a mysql database using mariadb as database type! (Please change the type to mysql in database.yml)");
             }
         } catch (Throwable t) {
             throw new DatabaseInitializationException(t.getMessage());
         }
 
-        // Disable JOOQ nonsense
+        // Setup JOOQ
         System.setProperty("org.jooq.no-logo", "true");
         System.setProperty("org.jooq.no-tips", "true");
-
-        // Setup JOOQ
         jooqContext = new JooqContext(
             config.getDatabaseType().getSQLDialect(),
             config.getTablePrefix()
@@ -203,6 +180,8 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
         // Migrate
         if (migrateOnStartup)
             migrate();
+
+        logger.info(LOG_PREFIX + "Successfully started database pool.");
     }
 
     /**
@@ -211,15 +190,15 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
     @Override
     @ApiStatus.Internal
     public void shutdown() {
-        logger.info("[DB] Shutting down database pool...");
+        logger.info(LOG_PREFIX + "Shutting down database pool...");
 
         if (connectionPool == null) {
-            logger.error("[DB] Skipped closing database pool because the connection pool is null. Was there a previous error which needs to be fixed? Check your logs!");
+            logger.error(LOG_PREFIX + "Skipped closing database pool because the connection pool is null. Was there a previous error which needs to be fixed? Check your logs!");
             return;
         }
 
         if (connectionPool.isClosed()) {
-            logger.error("[DB] Skipped closing database pool: connection is already closed.");
+            logger.error(LOG_PREFIX + "Skipped closing database pool: connection is already closed.");
             return;
         }
 
@@ -227,7 +206,7 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
         connectionPool.close();
         connectionPool = null;
 
-        logger.info("[DB] Closed database pool.");
+        logger.info(LOG_PREFIX + "Shutdown completed.");
     }
 
     /**
@@ -236,7 +215,7 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
      */
     public void migrate() throws DatabaseInitializationException {
         try {
-            new MigrationHandler(
+            new FlywayManager(
                 logger,
                 connectionPool,
                 config
@@ -249,6 +228,7 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
 
     /**
      * Get a builder instance for this class.
+     *
      * @return the builder
      */
     public static Builder builder() {
@@ -264,7 +244,8 @@ public class DatabaseHandler extends AbstractService implements Reloadable {
         private DatabaseConfig config;
         private boolean migrateOnStartup = false;
 
-        private Builder() {}
+        private Builder() {
+        }
 
         /**
          * With config handler database handler builder.

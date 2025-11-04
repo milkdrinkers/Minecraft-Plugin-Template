@@ -23,7 +23,8 @@ import java.util.Objects;
  * Handles Flyway migrations.
  */
 @SuppressWarnings({"UnusedReturnValue"})
-public final class MigrationHandler {
+public final class FlywayManager {
+    private static final String LOG_PREFIX = "[Database] ";
     private final DataSource dataSource;
     private final DatabaseConfig databaseConfig;
     private final Logger logger;
@@ -36,7 +37,7 @@ public final class MigrationHandler {
      * @param dataSource     the data source
      * @param databaseConfig the database config
      */
-    public MigrationHandler(Logger logger, DataSource dataSource, DatabaseConfig databaseConfig) {
+    public FlywayManager(Logger logger, DataSource dataSource, DatabaseConfig databaseConfig) {
         this.logger = Objects.requireNonNull(logger, "Logger cannot be null");
         this.dataSource = Objects.requireNonNull(dataSource, "DataSource cannot be null");
         this.databaseConfig = Objects.requireNonNull(databaseConfig, "DatabaseConfig cannot be null");
@@ -74,15 +75,15 @@ public final class MigrationHandler {
     public MigrateResult migrate() throws DatabaseMigrationException {
         try {
             LogFactory.setLogCreator(new FlywaySlf4jLogCreator(logger));
-            logger.info("Starting database migration...");
+            logger.info(LOG_PREFIX + "Starting database migration...");
 
             final MigrateResult result = this.flyway.migrate();
 
-            logger.info("Migration completed successfully. Applied {} migrations.", result.migrationsExecuted);
+            logger.info(LOG_PREFIX + "Migration completed successfully. Applied {} migrations.", result.migrationsExecuted);
 
             return result;
         } catch (FlywayException e) {
-            logger.error("Migration failed: {}", e.getMessage(), e);
+            logger.error(LOG_PREFIX + "Migration failed: {}", e.getMessage(), e);
             throw new DatabaseMigrationException(e);
         } finally {
             LogFactory.setLogCreator(null);
@@ -105,14 +106,14 @@ public final class MigrationHandler {
         try {
             LogFactory.setLogCreator(new FlywaySlf4jLogCreator(logger));
             if (databaseConfig.isRepair()) {
-                logger.info("Starting database repair...");
+                logger.info(LOG_PREFIX + "Starting database repair...");
                 final RepairResult result = this.flyway.repair();
-                logger.info("Database repair completed successfully.");
+                logger.info(LOG_PREFIX + "Database repair completed successfully.");
                 return result;
             }
             return null;
         } catch (FlywayException e) {
-            logger.error("Database repair failed: {}", e.getMessage(), e);
+            logger.error(LOG_PREFIX + "Database repair failed: {}", e.getMessage(), e);
             throw new DatabaseMigrationException(e);
         } finally {
             LogFactory.setLogCreator(null);
@@ -129,19 +130,19 @@ public final class MigrationHandler {
     public ValidateResult validate() throws DatabaseMigrationException {
         try {
             LogFactory.setLogCreator(new FlywaySlf4jLogCreator(logger));
-            logger.info("Validating database migrations...");
+            logger.info(LOG_PREFIX + "Validating database migrations...");
             final ValidateResult result = this.flyway.validateWithResult();
 
             if (result.validationSuccessful) {
-                logger.info("Migration validation successful.");
+                logger.info(LOG_PREFIX + "Migration validation successful.");
             } else {
-                logger.warn("Migration validation failed with {} errors", result.invalidMigrations.size());
-                logger.warn("Validation error: {}", result.getAllErrorMessages());
+                logger.warn(LOG_PREFIX + "Migration validation failed with {} errors", result.invalidMigrations.size());
+                logger.warn(LOG_PREFIX + "Validation error: {}", result.getAllErrorMessages());
             }
 
             return result;
         } catch (FlywayException e) {
-            logger.error("Migration validation failed: {}", e.getMessage(), e);
+            logger.error(LOG_PREFIX + "Migration validation failed: {}", e.getMessage(), e);
             throw new DatabaseMigrationException(e);
         } finally {
             LogFactory.setLogCreator(null);
@@ -158,7 +159,7 @@ public final class MigrationHandler {
         final MigrationInfoService infoService = this.flyway.info();
         final MigrationInfo[] migrations = infoService.all();
 
-        logger.info("Found {} total migrations ({} applied, {} pending).",
+        logger.info(LOG_PREFIX + "Found {} total migrations ({} applied, {} pending).",
             migrations.length,
             infoService.applied().length,
             infoService.pending().length);
@@ -173,8 +174,8 @@ public final class MigrationHandler {
      */
     @SuppressWarnings({"LoggingSimilarMessage"})
     private record FlywaySlf4jLogCreator(Logger logger) implements LogCreator {
-        private static final String LOG_PREFIX = "[Flyway|{}] ";
-        private static final String NOTICE_PREFIX = "[Flyway|{}] NOTICE: ";
+        private static final String LOG_PREFIX = "[Database|{}] ";
+        private static final String NOTICE_PREFIX = "[Database|{}] NOTICE: ";
 
         private FlywaySlf4jLogCreator(final Logger logger) {
             this.logger = Objects.requireNonNull(logger, "Logger cannot be null");
@@ -191,11 +192,6 @@ public final class MigrationHandler {
          * SLF4J-backed implementation of Flyway's Log interface.
          */
         private record FlywaySlf4jLog(Logger logger, String className) implements Log {
-            @Override
-            public boolean isDebugEnabled() {
-                return logger.isDebugEnabled();
-            }
-
             @Override
             public void debug(final String message) {
                 if (logger.isDebugEnabled()) {
