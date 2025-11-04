@@ -39,27 +39,50 @@ database:
       maintainTimeStats: false
 
 # Message Broker Settings
-messenger:
+messaging:
   # Enable or disable the message broker
   # This is only required if you are running the plugin on a server network
   enabled: true
 
   # How often to poll for new messages (in milliseconds)
-  # This value MUST be less than the cleanup-interval, preferably less than 1/3 of it.
+  # Must be less than cleanup-interval, ideally 1/3 or less
   polling-interval: 1000
 
   # How often to clean up old messages (in milliseconds)
-  # This value MUST be greater than the polling-interval, preferably at least 3 times it.
+  # Must be at least 3x the polling-interval
   cleanup-interval: 30000
 
-  # Available types: "sql", "plugin", "redis", "rabbitmq", "nats"
+  # Available broker types: "sql", "plugin", "redis", "rabbitmq", "nats"
   type: "sql"
 
-  # Shared settings (redis, rabbitmq, nats)
-  address: "localhost:6379" # Address can be a single entry, or a list of address entries if you wish to connect to a
+  # Connection settings (redis, rabbitmq, nats)
+  address: "localhost:6379" # Can be a single entry, or a list of addresses if you wish to connect to a cluster
   username: ""
   password: ""
-  ssl: false
 
-  # RabbitMQ specific settings
-  virtual-host: "/"
+  # Advanced broker configuration
+  advanced:
+    # Authentication method: "password", "certificate", "token"
+    auth-method: "password"
+
+    # Token authentication (JWT, API keys, Redis AUTH tokens)
+    auth-token: ""
+
+    # SSL/TLS configuration
+    ssl:
+      enabled: false
+      cert-path: ""              # Client certificate (.crt, .pem)
+      key-path: ""               # Private key (.key, .pem)
+      ca-path: ""                # Certificate Authority (.crt, .pem)
+      verify-server-cert: true
+      verify-hostname: true
+
+    # RabbitMQ-specific settings
+    rabbitmq:
+      virtual-host: "/"
+
+    # NATS-specific settings
+    nats:
+      nkey-seed-path: "" # NKey seed file for cryptographic auth
+      jwt-file-path: "" # JWT token file
+      credentials-path: "" # Combined JWT + NKey credentials file

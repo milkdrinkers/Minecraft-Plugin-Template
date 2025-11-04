@@ -57,7 +57,7 @@ public class DatabaseConfig {
      * @param connectionTimeout    the connection timeout
      * @param connectionProperties the connection properties
      */
-    DatabaseConfig(
+    private DatabaseConfig(
         DatabaseType databaseType,
         String tablePrefix,
         @Nullable Path path,
@@ -283,6 +283,7 @@ public class DatabaseConfig {
 
     /**
      * Get a config builder instance.
+     *
      * @return builder instance
      */
     public static Builder builder() {

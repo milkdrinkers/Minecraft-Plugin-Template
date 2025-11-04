@@ -6,13 +6,13 @@ import io.github.exampleuser.exampleplugin.cooldown.CooldownHandler;
 import io.github.exampleuser.exampleplugin.database.handler.DatabaseHandler;
 import io.github.exampleuser.exampleplugin.hook.HookManager;
 import io.github.exampleuser.exampleplugin.listener.ListenerHandler;
-import io.github.exampleuser.exampleplugin.messenger.MessengerHandler;
+import io.github.exampleuser.exampleplugin.messaging.MessagingHandler;
 import io.github.exampleuser.exampleplugin.threadutil.SchedulerHandler;
 import io.github.exampleuser.exampleplugin.translation.TranslationHandler;
 import io.github.exampleuser.exampleplugin.updatechecker.UpdateHandler;
 import io.github.exampleuser.exampleplugin.utility.DB;
 import io.github.exampleuser.exampleplugin.utility.Logger;
-import io.github.exampleuser.exampleplugin.utility.Messenger;
+import io.github.exampleuser.exampleplugin.utility.Messaging;
 import io.github.milkdrinkers.colorparser.paper.ColorParser;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,7 +31,7 @@ public class ExamplePlugin extends JavaPlugin {
     private ConfigHandler configHandler;
     private TranslationHandler translationHandler;
     private DatabaseHandler databaseHandler;
-    private MessengerHandler messengerHandler;
+    private MessagingHandler messagingHandler;
     private HookManager hookManager;
     private CommandHandler commandHandler;
     private ListenerHandler listenerHandler;
@@ -62,7 +62,7 @@ public class ExamplePlugin extends JavaPlugin {
             .withLogger(getComponentLogger())
             .withMigrate(true)
             .build();
-        messengerHandler = MessengerHandler.builder()
+        messagingHandler = MessagingHandler.builder()
             .withLogger(getComponentLogger())
             .withName(getName())
             .build();
@@ -77,7 +77,7 @@ public class ExamplePlugin extends JavaPlugin {
             configHandler,
             translationHandler,
             databaseHandler,
-            messengerHandler,
+            messagingHandler,
             hookManager,
             commandHandler,
             listenerHandler,
@@ -87,7 +87,7 @@ public class ExamplePlugin extends JavaPlugin {
         );
 
         DB.init(databaseHandler);
-        Messenger.init(messengerHandler);
+        Messaging.init(messagingHandler);
         for (Reloadable handler : handlers)
             handler.onLoad(instance);
     }
@@ -97,13 +97,13 @@ public class ExamplePlugin extends JavaPlugin {
         for (Reloadable handler : handlers)
             handler.onEnable(instance);
 
-        if (!DB.isReady()) {
+        if (!DB.isStarted()) {
             Logger.get().warn(ColorParser.of("<yellow>Database handler failed to start. Database support has been disabled.").build());
             Bukkit.getPluginManager().disablePlugin(this);
         }
 
-        if (!Messenger.isReady() && configHandler.getDatabaseConfig().getBoolean("messenger.enabled")) {
-            Logger.get().warn(ColorParser.of("<yellow>Messenger handler failed to start. Messenger support has been disabled.").build());
+        if (!Messaging.isReady() && configHandler.getDatabaseConfig().getBoolean("messenger.enabled")) {
+            Logger.get().warn(ColorParser.of("<yellow>Messaging handler failed to start. Messaging support has been disabled.").build());
             Bukkit.getPluginManager().disablePlugin(this);
         }
     }

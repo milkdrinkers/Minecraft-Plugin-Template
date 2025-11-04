@@ -4,9 +4,9 @@ import io.github.exampleuser.exampleplugin.cooldown.CooldownType;
 import io.github.exampleuser.exampleplugin.cooldown.Cooldowns;
 import io.github.exampleuser.exampleplugin.database.handler.DatabaseType;
 import io.github.exampleuser.exampleplugin.database.schema.tables.records.CooldownsRecord;
-import io.github.exampleuser.exampleplugin.messenger.message.IncomingMessage;
-import io.github.exampleuser.exampleplugin.messenger.message.Message;
-import io.github.exampleuser.exampleplugin.messenger.message.OutgoingMessage;
+import io.github.exampleuser.exampleplugin.messaging.message.BidirectionalMessage;
+import io.github.exampleuser.exampleplugin.messaging.message.IncomingMessage;
+import io.github.exampleuser.exampleplugin.messaging.message.OutgoingMessage;
 import io.github.exampleuser.exampleplugin.utility.DB;
 import io.github.exampleuser.exampleplugin.utility.Logger;
 import org.bukkit.OfflinePlayer;
@@ -269,7 +269,7 @@ public final class Queries {
                     )
                     .orderBy(MESSAGING.ID.asc())
                     .fetch()
-                    .intoMap(MESSAGING.ID, r -> Message.from(r.getMessage()));
+                    .intoMap(MESSAGING.ID, r -> BidirectionalMessage.from(r.getMessage()));
             } catch (SQLException e) {
                 Logger.get().error("SQL Query threw an error!" + e);
                 return Map.of();
