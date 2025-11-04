@@ -195,7 +195,7 @@ tasks {
     }
 }
 
-bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
+bukkit { // Options: https://docs.eldoria.de/pluginyml/bukkit/
     // Plugin main class (required)
     main = project.entryPointClass
 
@@ -217,7 +217,7 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     provides = listOf()
 }
 
-paper { // Options: https://github.com/eldoriarpg/plugin-yml/wiki/Paper
+paper { // Options: https://docs.eldoria.de/pluginyml/paper/
     main = project.entryPointClass
     loader = project.entryPointClass + "PluginLoader"
     generateLibrariesJson = true
