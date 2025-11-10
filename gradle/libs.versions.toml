@@ -45,7 +45,7 @@ mariadb = "org.mariadb.jdbc:mariadb-java-client:3.5.6"
 
 # Messaging drivers
 jedis = "redis.clients:jedis:7.0.0"
-nats = "io.nats:jnats:2.23.0"
+nats = "io.nats:jnats:2.24.0"
 rabbitmq = "com.rabbitmq:amqp-client:5.27.1"
 
 # Testing
