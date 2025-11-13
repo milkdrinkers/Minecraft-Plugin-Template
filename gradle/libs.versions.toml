@@ -3,7 +3,7 @@ paper-api = "1.21.10-R0.1-SNAPSHOT"
 paper-run = "1.21.10"
 crate = "4.0.0-RC.5"
 commandapi = "11.0.0"
-flyway = "11.16.0"
+flyway = "11.17.0"
 jooq = "3.20.9"
 
 [libraries]
