@@ -22,7 +22,7 @@ colorparser = "io.github.milkdrinkers:colorparser-paper:4.1.0"
 threadutil-bukkit = "io.github.milkdrinkers:threadutil-bukkit:1.4.0"
 commandapi-shade = { module = "dev.jorel:commandapi-paper-shade", version.ref = "commandapi" }
 commandapi-annotations = { module = "dev.jorel:commandapi-paper-annotations", version.ref = "commandapi" }
-triumph-gui = "dev.triumphteam:triumph-gui:3.1.13"
+triumph-gui = "dev.triumphteam:triumph-gui-paper:3.1.13"
 
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
@@ -73,5 +73,4 @@ run-paper = "xyz.jpenilla.run-paper:3.0.2"
 plugin-yml-bukkit = "de.eldoria.plugin-yml.bukkit:0.8.0"
 plugin-yml-paper = "de.eldoria.plugin-yml.paper:0.8.0"
 paperweight = "io.papermc.paperweight.userdev:1.7.7"
-flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
 jooq = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }
