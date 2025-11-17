@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 /**
- * A class handling/managing the implementation & lifecycle of the database service (HikariCP connection pool, jOOQ and Flyway migrations).
+ * A class handling/managing the implementation {@literal &} lifecycle of the database service (HikariCP connection pool, jOOQ and Flyway migrations).
  */
 public final class DatabaseHandler extends AbstractService implements Reloadable {
     private static final String LOG_PREFIX = "[Database] ";

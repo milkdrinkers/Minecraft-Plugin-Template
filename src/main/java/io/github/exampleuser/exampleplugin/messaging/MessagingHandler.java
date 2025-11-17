@@ -33,7 +33,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A class handling/managing the implementation & lifecycle of the messaging service.
+ * A class handling/managing the implementation {@literal &} lifecycle of the messaging service.
  */
 public final class MessagingHandler extends AbstractService implements Reloadable, MessageConsumer {
     private static final String LOG_PREFIX = "[Messaging] ";

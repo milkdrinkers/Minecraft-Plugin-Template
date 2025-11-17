@@ -33,14 +33,6 @@ public class ConfigHandler implements Reloadable {
             .build();
     }
 
-    @Override
-    public void onEnable(ExamplePlugin plugin) {
-    }
-
-    @Override
-    public void onDisable(ExamplePlugin plugin) {
-    }
-
     /**
      * Gets main config object.
      *
