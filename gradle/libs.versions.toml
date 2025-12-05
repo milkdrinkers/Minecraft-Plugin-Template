@@ -68,7 +68,7 @@ junit = ["junit-jupiter", "junit-platform"]
 testcontainers = ["testcontainers-jupiter", "testcontainers-mysql", "testcontainers-mariadb", "testcontainers-redis", "testcontainers-rabbitmq"]
 
 [plugins]
-shadow = "com.gradleup.shadow:9.2.2"
+shadow = "com.gradleup.shadow:9.3.0"
 run-paper = "xyz.jpenilla.run-paper:3.0.2"
 plugin-yml-bukkit = "de.eldoria.plugin-yml.bukkit:0.8.0"
 plugin-yml-paper = "de.eldoria.plugin-yml.paper:0.8.0"
