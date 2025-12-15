@@ -84,7 +84,7 @@ jobs:
       # Archive test results for debugging if tests fail
       - name: Archive Test Results
         if: steps.run-tests.outputs.test_exit_code != '0'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: test-results
           path: |
