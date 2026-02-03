@@ -28,7 +28,7 @@ triumph-gui = "dev.triumphteam:triumph-gui-paper:3.1.13"
 bstats = "org.bstats:bstats-bukkit:3.1.0"
 vault = "com.github.MilkBowl:VaultAPI:1.7.1"
 packetevents = "com.github.retrooper:packetevents-spigot:2.11.1"
-placeholderapi = "me.clip:placeholderapi:2.11.7"
+placeholderapi = "me.clip:placeholderapi:2.12.0"
 
 # Database dependencies
 hikaricp = "com.zaxxer:HikariCP:7.0.2"
