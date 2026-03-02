@@ -8,7 +8,7 @@ jooq = "3.20.11"
 
 [libraries]
 # Core dependencies
-annotations = "org.jetbrains:annotations:26.0.2-1"
+annotations = "org.jetbrains:annotations:26.1.0"
 paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
 morepaperlib = "space.arim.morepaperlib:morepaperlib:0.4.4"
 
