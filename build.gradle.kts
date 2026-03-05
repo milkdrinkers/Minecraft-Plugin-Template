@@ -206,7 +206,7 @@ bukkit { // Options: https://docs.eldoria.de/pluginyml/bukkit/
     description = "${project.description}"
     authors = project.authors
     contributors = project.contributors
-    apiVersion = libs.versions.paper.api.get().substringBefore("-R")
+    apiVersion = libs.versions.paper.api.get().substringBefore("-R").substringBefore("-pre")
     foliaSupported = true
 
     // Misc properties
@@ -230,7 +230,7 @@ paper { // Options: https://docs.eldoria.de/pluginyml/paper/
     description = "${project.description}"
     authors = project.authors
     contributors = project.contributors
-    apiVersion = libs.versions.paper.api.get().substringBefore("-R")
+    apiVersion = libs.versions.paper.api.get().substringBefore("-R").substringBefore("-pre")
     foliaSupported = false
 
     // Dependencies
