@@ -13,7 +13,7 @@ paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
 morepaperlib = "space.arim.morepaperlib:morepaperlib:0.4.4"
 
 # API dependencies
-javasemver = "io.github.milkdrinkers:javasemver:1.1.0"
+javasemver = "io.github.milkdrinkers:javasemver:1.0.2"
 versionwatch = "io.github.milkdrinkers:versionwatch:1.1.0"
 wordweaver = "io.github.milkdrinkers:wordweaver:0.0.7"
 crate-api = { module = "io.github.milkdrinkers:crate-api", version.ref = "crate" }
