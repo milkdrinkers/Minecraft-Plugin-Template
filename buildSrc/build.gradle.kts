@@ -18,20 +18,17 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("projectextensions") {
-            id = "projectextensions"
+        register("projectextensions") {
             implementationClass = "ProjectExtensionsPlugin"
         }
     }
     plugins {
-        create("versioning") {
-            id = "versioning"
+        register("versioning") {
             implementationClass = "versioning.VersioningPlugin"
         }
     }
     plugins {
-        create("flyway") {
-            id = "flyway"
+        register("flyway") {
             implementationClass = "flyway.FlywayPlugin"
         }
     }
