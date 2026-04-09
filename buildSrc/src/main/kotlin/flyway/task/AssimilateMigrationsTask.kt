@@ -45,8 +45,8 @@ abstract class AssimilateMigrationsTask : DefaultTask() {
         outputDir.mkdirs()
 
         // Get all common migrations from the resource directory
-        val commonMigrations = inputDir.walkTopDown()
-            .filter { it.isFile && sqlMigrationSuffixes.get().any { s -> it.extension == s.removePrefix(".") } }
+        val commonMigrations = (inputDir.listFiles { file -> file.isFile } ?: emptyArray())
+            .filter { sqlMigrationSuffixes.get().any { s -> it.extension == s.removePrefix(".") } }
             .associateBy { it.name }
 
         logger.info("Found ${commonMigrations.size} common migrations")
@@ -70,8 +70,8 @@ abstract class AssimilateMigrationsTask : DefaultTask() {
         outputDir: File
     ) {
         val rdbmsName = rdbmsDir.name
-        val specificMigrations = rdbmsDir.walkTopDown()
-            .filter { it.isFile && sqlMigrationSuffixes.get().any { s -> it.extension == s.removePrefix(".") } }
+        val specificMigrations = (rdbmsDir.listFiles { file -> file.isFile } ?: emptyArray())
+            .filter { sqlMigrationSuffixes.get().any { s -> it.extension == s.removePrefix(".") } }
             .associateBy { it.name }
 
         val allVersions = (commonMigrations.keys + specificMigrations.keys).toSet()
