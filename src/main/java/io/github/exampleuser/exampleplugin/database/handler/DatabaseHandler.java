@@ -66,7 +66,7 @@ public final class DatabaseHandler extends AbstractService implements Reloadable
         try {
             doStartup();
         } catch (Exception e) {
-            logger.error(LOG_PREFIX + "Database initialization error: {}", e.getMessage());
+            logger.error(LOG_PREFIX + "Database initialization error:", e);
         }
     }
 
