@@ -30,15 +30,18 @@ public final class HikariConfigFactory {
         // Create RDBMS specific jdbc url
         final String jdbcUrl = switch (databaseType) {
             case SQLITE, H2 -> {
-                final Optional<Path> path = config.getPath();
-                if (path.isEmpty())
-                    throw new DatabaseInitializationException("Path was null when setting up database!");
+                final Path path = config.getPath().orElseThrow(
+                    () -> new DatabaseInitializationException("Path was null when setting up database!")
+                );
 
                 final String fileName = databaseType.equals(SQLITE) ? "database.sqlite" : "database";
 
+                if (!path.toFile().exists() && !path.toFile().mkdirs())
+                    throw new DatabaseInitializationException("Failed to create database directory at path: %s".formatted(path.toAbsolutePath()));
+
                 yield "jdbc:%s:file:%s%s".formatted(
                     databaseType.getJdbcPrefix(),
-                    path.get().resolve(fileName).toAbsolutePath(),
+                    path.resolve(fileName).toAbsolutePath(),
                     databaseType.getDefaultConnectionProperties()
                 );
             }
