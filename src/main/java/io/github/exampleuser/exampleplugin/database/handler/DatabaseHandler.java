@@ -152,7 +152,7 @@ public final class DatabaseHandler extends AbstractService implements Reloadable
         try {
             connectionPool = new HikariDataSource(HikariConfigFactory.get(config));
         } catch (Throwable t) {
-            throw new DatabaseInitializationException("Failed to initialize database pool during startup. Are you using the correct database type?");
+            throw new DatabaseInitializationException("Failed to initialize database pool during startup. Are you using the correct database type?", t);
         }
 
         // Check if using invalid database type (Note, these cases throw in the previous method)
@@ -166,7 +166,7 @@ public final class DatabaseHandler extends AbstractService implements Reloadable
                 throw new DatabaseInitializationException("Attempted to connect to a mysql database using mariadb as database type! (Please change the type to mysql in database.yml)");
             }
         } catch (Throwable t) {
-            throw new DatabaseInitializationException(t.getMessage());
+            throw new DatabaseInitializationException(t);
         }
 
         // Setup JOOQ
