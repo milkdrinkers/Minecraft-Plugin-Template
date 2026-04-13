@@ -71,6 +71,6 @@ testcontainers = ["testcontainers-jupiter", "testcontainers-mysql", "testcontain
 shadow = "com.gradleup.shadow:9.4.0"
 run-paper = "xyz.jpenilla.run-paper:3.0.2"
 plugin-yml-bukkit = "de.eldoria.plugin-yml.bukkit:0.9.0"
-plugin-yml-paper = "de.eldoria.plugin-yml.paper:0.8.0"
+plugin-yml-paper = "de.eldoria.plugin-yml.paper:0.9.0"
 paperweight = "io.papermc.paperweight.userdev:1.7.7"
 jooq = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }
