@@ -1,8 +1,0 @@
-# Update Checker Settings
-update-checker:
-  enable: true
-  console: true # Post message to console
-  op: true # Send update notification to opped players on join
-
-# Language, specify the language file to use, for example `en_US` which will load `/lang/en_US.json`
-language: "en_US"

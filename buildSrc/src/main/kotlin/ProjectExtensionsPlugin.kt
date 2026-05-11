@@ -24,7 +24,7 @@ abstract class ProjectExtensionsPlugin : Plugin<Project> {
     }
 
     private fun getRelocationPackage(project: Project): String {
-        return "${getMainPackage(project)}.lib"
+        return "${getMainPackage(project)}.shaded"
     }
 
     private fun getAuthors(project: Project): List<String> {
