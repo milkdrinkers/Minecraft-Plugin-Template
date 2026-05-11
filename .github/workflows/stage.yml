@@ -87,16 +87,20 @@ jobs:
       # Generate build provenance attestations if enabled
       - name: Generate Build Provenance Attestations
         if: ${{ inputs.generate_attestations }}
-        uses: actions/attest-build-provenance@v4
+        uses: actions/attest@v4
         with:
-          subject-path: "${{ github.workspace }}/build/libs/*"
+          subject-path: |
+            ${{ github.workspace }}/api/build/libs/*.jar
+            ${{ github.workspace }}/paper/build/libs/*.jar
 
       # Upload the snapshot artifacts
       - name: Upload Snapshot Artifacts
         uses: actions/upload-artifact@v7
         with:
           name: Snapshot-${{ github.run_number }}
-          path: ${{ github.workspace }}/build/libs/
+          path: |
+            ${{ github.workspace }}/api/build/libs/
+            ${{ github.workspace }}/paper/build/libs/
           retention-days: ${{ inputs.retention_days }}
           if-no-files-found: error
 
@@ -186,15 +190,19 @@ jobs:
 
       - name: Generate Build Provenance Attestations
         if: ${{ inputs.generate_attestations }}
-        uses: actions/attest-build-provenance@v4
+        uses: actions/attest@v4
         with:
-          subject-path: "${{ github.workspace }}/build/libs/*"
+          subject-path: |
+            ${{ github.workspace }}/api/build/libs/*.jar
+            ${{ github.workspace }}/paper/build/libs/*.jar
 
       - name: Upload Release Artifacts
         uses: actions/upload-artifact@v7
         with:
           name: Release
-          path: ${{ github.workspace }}/build/libs/
+          path: |
+            ${{ github.workspace }}/api/build/libs/
+            ${{ github.workspace }}/paper/build/libs/
           retention-days: ${{ inputs.retention_days }}
           if-no-files-found: error
 
