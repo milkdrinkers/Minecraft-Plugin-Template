@@ -102,6 +102,7 @@ jobs:
             ${{ github.workspace }}/api/build/libs/
             ${{ github.workspace }}/paper/build/libs/
           retention-days: ${{ inputs.retention_days }}
+          archive: false
           if-no-files-found: error
 
       # Publish to maven
