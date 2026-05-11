@@ -7,6 +7,10 @@ updates:
     commit-message:
       prefix: "ci:"
     target-branch: "main"
+    groups:
+      "github-actions":
+        patterns:
+          - "*"
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
@@ -15,12 +19,24 @@ updates:
       prefix: "build:"
     target-branch: "main"
     groups:
-      "org.flywaydb":
+      "database":
         patterns:
           - "org.flywaydb*"
-      "org.jooq":
-        patterns:
           - "org.jooq*"
+          - "com.h2database*"
+          - "org.xerial*"
+          - "com.mysql*"
+          - "org.mariadb.jdbc*"
+          - "redis.clients*"
+          - "io.nats:jnats*"
+          - "com.rabbitmq*"
+      "testing":
+        patterns:
+          - "org.junit*"
+          - "org.testcontainers*"
+      "milkdrinkers":
+        patterns:
+          - "io.github.milkdrinkers*"
       "net.kyori":
         patterns:
           - "net.kyori*"
