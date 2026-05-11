@@ -1,10 +1,12 @@
 [versions]
 paper-api = "1.21.11-R0.1-SNAPSHOT"
 paper-run = "1.21.11"
-crate = "4.0.0-RC.5"
 commandapi = "11.2.0"
 flyway = "12.6.0"
 jooq = "3.21.3"
+configurate = "4.2.0-GeyserMC-SNAPSHOT"
+colorparser = "4.2.0"
+threadutil = "1.4.0"
 
 [libraries]
 # Core dependencies
@@ -16,12 +18,18 @@ morepaperlib = "space.arim.morepaperlib:morepaperlib:0.4.4"
 javasemver = "io.github.milkdrinkers:javasemver:1.0.2"
 versionwatch = "io.github.milkdrinkers:versionwatch:1.1.0"
 wordweaver = "io.github.milkdrinkers:wordweaver:0.0.7"
-crate-api = { module = "io.github.milkdrinkers:crate-api", version.ref = "crate" }
-crate-yaml = { module = "io.github.milkdrinkers:crate-yaml", version.ref = "crate" }
-colorparser = "io.github.milkdrinkers:colorparser-paper:4.2.0"
-threadutil-bukkit = "io.github.milkdrinkers:threadutil-bukkit:1.4.0"
-commandapi-shade = { module = "dev.jorel:commandapi-paper-shade", version.ref = "commandapi" }
-commandapi-annotations = { module = "dev.jorel:commandapi-paper-annotations", version.ref = "commandapi" }
+yaml = { module = "org.yaml:snakeyaml", version = "2.6" }
+configurate-geantyref = "io.leangen.geantyref:geantyref:2.0.1"
+configurate-interfaces-ap = { module = "org.spongepowered:configurate-extra-interface-ap", version.ref = "configurate" }
+configurate-interfaces-core = { module = "org.spongepowered:configurate-extra-interface", version.ref = "configurate" }
+configurate-core = { module = "org.spongepowered:configurate-core", version.ref = "configurate" }
+configurate-yaml = { module = "org.spongepowered:configurate-yaml", version.ref = "configurate" }
+colorparser-common = { module = "io.github.milkdrinkers:colorparser-common", version.ref = "colorparser" }
+colorparser-paper = { module = "io.github.milkdrinkers:colorparser-paper", version.ref = "colorparser" }
+threadutil-common = { module = "io.github.milkdrinkers:threadutil-common", version.ref = "threadutil" }
+threadutil-bukkit = { module = "io.github.milkdrinkers:threadutil-bukkit", version.ref = "threadutil" }
+commandapi-core = { module = "dev.jorel:commandapi-core", version.ref = "commandapi" }
+commandapi-shade-paper = { module = "dev.jorel:commandapi-paper-shade", version.ref = "commandapi" }
 triumph-gui = "dev.triumphteam:triumph-gui-paper:3.1.13"
 
 # Plugin dependencies
@@ -61,6 +69,8 @@ testcontainers-redis = { module = "com.redis:testcontainers-redis", version = "2
 testcontainers-rabbitmq = { module = "org.testcontainers:testcontainers-rabbitmq" }
 
 [bundles]
+configurate-core = ["configurate-core", "configurate-interfaces-core", "configurate-interfaces-ap", "configurate-geantyref"]
+configurate-yaml = ["configurate-yaml", "yaml"]
 flyway = ["flyway-core", "flyway-mysql"]
 jdbcdrivers = ["h2", "sqlite", "mysql", "mariadb"]
 messagingclients = ["jedis", "nats", "rabbitmq"]
@@ -74,3 +84,4 @@ plugin-yml-bukkit = "de.eldoria.plugin-yml.bukkit:0.9.0"
 plugin-yml-paper = "de.eldoria.plugin-yml.paper:0.9.0"
 paperweight = "io.papermc.paperweight.userdev:1.7.7"
 jooq = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }
+publisher = "com.vanniktech.maven.publish:0.36.0"

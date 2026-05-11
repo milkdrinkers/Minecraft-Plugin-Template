@@ -1,32 +1,31 @@
 package versioning
 
-import org.gradle.api.Project
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
+import org.gradle.api.provider.ProviderFactory
 import org.gradle.kotlin.dsl.property
-import java.io.File
+import javax.inject.Inject
 
 /**
- * The configuration object for the Versioning plugin.
+ * Configuration object.
+ * @author darksaid98
  */
-abstract class VersioningPluginExtension(
-    private val project: Project
+@Suppress("CanBeParameter")
+abstract class VersioningPluginExtension @Inject constructor(
+    private val objects: ObjectFactory,
+    private val providers: ProviderFactory
 ) {
     companion object {
         internal const val EXTENSION_NAME = "versioning"
     }
 
-    val applyProject: Property<Boolean> = project.objects.property<Boolean>().convention(true)
-    val applySubProjects: Property<Boolean> = project.objects.property<Boolean>().convention(true)
-    val useGit: Property<Boolean> = project.objects.property<Boolean>().convention(true)
-    val gitDirectory: Property<File> = project.objects.property<File>()
-    val autoIncrementSnapshot: Property<Boolean> = project.objects.property<Boolean>().convention(true)
-
-    init {
-        gitDirectory.convention(project.provider {
-            project.rootDir.resolve(".git")
-        })
-    }
+    val applyProject: Property<Boolean> = objects.property<Boolean>().convention(true)
+    val applySubProjects: Property<Boolean> = objects.property<Boolean>().convention(true)
+    val useGit: Property<Boolean> = objects.property<Boolean>().convention(true)
+    val gitDirectory: DirectoryProperty = objects.directoryProperty()
+    val autoIncrementSnapshot: Property<Boolean> = objects.property<Boolean>().convention(true)
 
     /**
      * Get the computed version as a Provider for build cache compatibility.
@@ -36,15 +35,14 @@ abstract class VersioningPluginExtension(
         gitVersionProvider: Provider<GitVersionValueSource.GitInfo>,
         originalVersion: String
     ): Provider<String> {
-        return project.provider {
-            val versionOverride = project.findProperty("altVer")?.toString()
+        val versionOverride = providers.gradleProperty("altVer")
+        val snapshotLabel = providers.gradleProperty("snapshot").orElse("SNAPSHOT")
 
-            if (versionOverride != null) {
-                stripLeadingV(versionOverride)
-            } else {
-                createSnapshotVersion(originalVersion, gitVersionProvider.orNull)
-            }
-        }
+        return versionOverride
+            .map { stripLeadingV(it) }
+            .orElse(providers.provider {
+                createSnapshotVersion(originalVersion, gitVersionProvider.orNull, snapshotLabel.get())
+            })
     }
 
     /**
@@ -52,10 +50,10 @@ abstract class VersioningPluginExtension(
      */
     private fun createSnapshotVersion(
         originalVersion: String,
-        gitVersion: GitVersionValueSource.GitInfo?
+        gitVersion: GitVersionValueSource.GitInfo?,
+        preReleaseName: String
     ): String {
         val cleanVersion = stripLeadingV(originalVersion)
-        val preReleaseName = project.findProperty("snapshot")?.toString() ?: "SNAPSHOT"
 
         // Increment minor version to differentiate snapshot from existing releases
         val version = incrementVersion(cleanVersion)

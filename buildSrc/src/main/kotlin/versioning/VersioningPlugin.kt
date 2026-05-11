@@ -11,12 +11,12 @@ import org.gradle.kotlin.dsl.of
  * @author darksaid98
  */
 @Suppress("unused")
-abstract class VersioningPlugin : Plugin<Project> {
+class VersioningPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = with(project) {
         val extension = extensions.create<VersioningPluginExtension>(
-            VersioningPluginExtension.EXTENSION_NAME,
-            project
+            VersioningPluginExtension.EXTENSION_NAME
         )
+        extension.gitDirectory.convention(layout.projectDirectory.dir(rootDir.resolve(".git").absolutePath))
         val gitVersionProvider = project.providers.of(GitVersionValueSource::class) {
             parameters {
                 gitDir.set(extension.gitDirectory)
