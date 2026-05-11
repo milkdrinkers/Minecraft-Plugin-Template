@@ -100,7 +100,23 @@ jobs:
           retention-days: ${{ inputs.retention_days }}
           if-no-files-found: error
 
-      # Publish to maven TODO
+      # Publish to maven
+#      - name: Upload & Publish to Maven Repository
+#        shell: bash
+#        run: |
+#          set +e  # Don't exit immediately on error
+#          ./gradlew publish -PaltVer=${{ steps.version.outputs.version }} -x test
+#          PUBLISHING_EXIT_CODE=$?
+#
+#          if [ PUBLISHING_EXIT_CODE -ne 0 ]; then
+#            echo "::error::Publishing maven artifacts failed with exit code PUBLISHING_EXIT_CODE"
+#            exit PUBLISHING_EXIT_CODE
+#          fi
+#        env:
+#          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+#          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
+#          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_CENTRAL_GPG_SECRET_KEY }}
+#          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.MAVEN_CENTRAL_GPG_SECRET_KEY_PASSWORD }}
 
   # Update version in properties file for release builds
   stage-version:
@@ -182,4 +198,20 @@ jobs:
           retention-days: ${{ inputs.retention_days }}
           if-no-files-found: error
 
-      # Publish to maven TODO
+#      # Publish to maven
+#      - name: Upload & Publish to Maven Repository
+#        shell: bash
+#        run: |
+#          set +e  # Don't exit immediately on error
+#          ./gradlew publishAllPublicationsToMavenCentralRepository -PaltVer=${{ steps.version.outputs.version }} -x test
+#          PUBLISHING_EXIT_CODE=$?
+#
+#          if [ PUBLISHING_EXIT_CODE -ne 0 ]; then
+#            echo "::error::Publishing maven artifacts failed with exit code PUBLISHING_EXIT_CODE"
+#            exit PUBLISHING_EXIT_CODE
+#          fi
+#        env:
+#          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+#          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
+#          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_CENTRAL_GPG_SECRET_KEY }}
+#          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.MAVEN_CENTRAL_GPG_SECRET_KEY_PASSWORD }}
