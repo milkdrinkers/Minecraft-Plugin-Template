@@ -12,7 +12,7 @@ on:
         description: "The Java version the workflow should use"
         required: false
         type: number
-        default: 21
+        default: 25
       retention_days:
         description: "Artifact retention days (default: 7)"
         required: false

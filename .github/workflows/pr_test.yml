@@ -9,7 +9,7 @@ on:
       java:
         description: 'Java version'
         type: number
-        default: 21
+        default: 25
       os:
         description: 'OS'
         type: choice
@@ -29,5 +29,5 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       os: ${{ inputs.os || 'ubuntu-latest' }}
-      java: ${{ inputs.java || 21 }}
+      java: ${{ inputs.java || 25 }}
       fail_on_test_failure: true
