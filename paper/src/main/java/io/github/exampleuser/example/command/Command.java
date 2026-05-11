@@ -7,6 +7,8 @@ import io.github.milkdrinkers.colorparser.paper.ColorParser;
 import io.github.milkdrinkers.wordweaver.Translation;
 import net.kyori.adventure.text.ComponentLike;
 
+import java.io.Serial;
+
 @SuppressWarnings("unused")
 public abstract class Command {
     public abstract CommandAPICommand command();
@@ -40,7 +42,8 @@ public abstract class Command {
         }
 
         class CommandException extends WrapperCommandSyntaxException {
-            private final ComponentLike message;
+            private static @Serial final long serialVersionUID = 1L;
+            private transient final ComponentLike message;
 
             public CommandException(ComponentLike message) {
                 super(CommandAPIPaper.failWithAdventureComponent(message).getException());
