@@ -79,7 +79,8 @@ jobs:
           require_tests: false
           fail_on_failure: ${{ inputs.fail_on_test_failure }}
           check_name: Test Report
-          report_paths: '**/build/test-results/**/TEST-*.xml'
+          detailed_summary: true
+          report_paths: '**/build/test-results/test/TEST-*.xml'
 
       # Archive test results for debugging if tests fail
       - name: Archive Test Results
