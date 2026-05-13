@@ -1,24 +1,28 @@
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align: center;">
 <img style="text-align:center;" src="assets/example_banner.webp" alt="project banner">
 
----
+<h1>Project Name</h1>
 
-<h1 style="text-align:center;">Project Name</h1>
+_Write your description of what your plugin is for here! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis a justo sit amet suscipit. Integer nec ipsum tincidunt, pretium lectus quis, feugiat elit. Phasellus nisl purus, ullamcorper a magna vel, commodo scelerisque ante. Nam mollis nulla non risus accumsan, ut porttitor justo gravida. Aenean turpis elit, porta sit amet diam sit amet, congue hendrerit est. Mauris pharetra elit lacus, id dictum diam facilisis vitae. Curabitur non finibus ex._
 
-<p style="text-align:center;">
-    <a href="https://github.com/Alathra/Template-Gradle-Plugin/blob/main/LICENSE">
-        <img alt="GitHub License" src="https://img.shields.io/github/license/Alathra/Template-Gradle-Plugin?style=for-the-badge&color=blue&labelColor=141417">
+<br>
+<div>
+    <a href="https://github.com/milkdrinkers/Minecraft-Plugin-Template/blob/main/LICENSE">
+        <img alt="GitHub License" src="https://img.shields.io/github/license/milkdrinkers/Minecraft-Plugin-Template?style=for-the-badge&color=blue&labelColor=141417">
     </a>
-    <a href="https://github.com/Alathra/Template-Gradle-Plugin/releases">
-        <img alt="GitHub Release" src="https://img.shields.io/github/v/release/Alathra/Template-Gradle-Plugin?include_prereleases&sort=semver&style=for-the-badge&label=LATEST%20VERSION&labelColor=141417">
+    <a href="https://github.com/milkdrinkers/Minecraft-Plugin-Template/releases">
+        <img alt="GitHub Release" src="https://img.shields.io/github/v/release/milkdrinkers/Minecraft-Plugin-Template?include_prereleases&sort=semver&style=for-the-badge&label=LATEST%20VERSION&labelColor=141417">
     </a>
-    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Alathra/Template-Gradle-Plugin/ci.yml?style=for-the-badge&labelColor=141417">
-    <a href="https://github.com/Alathra/Template-Gradle-Plugin/issues">
-        <img alt="GitHub Issues" src="https://img.shields.io/github/issues/Alathra/Template-Gradle-Plugin?style=for-the-badge&labelColor=141417">
+    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/milkdrinkers/Minecraft-Plugin-Template/ci.yml?style=for-the-badge&labelColor=141417">
+    <a href="https://github.com/milkdrinkers/Minecraft-Plugin-Template/issues">
+        <img alt="GitHub Issues" src="https://img.shields.io/github/issues/milkdrinkers/Minecraft-Plugin-Template?style=for-the-badge&labelColor=141417">
     </a>
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Alathra/Template-Gradle-Plugin?style=for-the-badge&labelColor=141417">
-</p>
-
-Write your description of what your plugin is for here! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis a justo sit amet suscipit. Integer nec ipsum tincidunt, pretium lectus quis, feugiat elit. Phasellus nisl purus, ullamcorper a magna vel, commodo scelerisque ante. Nam mollis nulla non risus accumsan, ut porttitor justo gravida. Aenean turpis elit, porta sit amet diam sit amet, congue hendrerit est. Mauris pharetra elit lacus, id dictum diam facilisis vitae. Curabitur non finibus ex.
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/milkdrinkers/Minecraft-Plugin-Template?style=for-the-badge&labelColor=141417">
+    <a href="https://discord.gg/cG5uWvUcM6">
+        <img alt="Discord Server" src="https://img.shields.io/badge/-DISCORD-5865F2?style=for-the-badge&logo=discord&logoColor=ffffff&color=%235865F2">
+    </a>
+</div>
+</div>
 
 ---
 
@@ -31,8 +35,8 @@ Write your description of what your plugin is for here! Lorem ipsum dolor sit am
 
 ## 📦 Downloads
 
-<a href="https://github.com/Alathra/Template-Gradle-Plugin/releases/latest">
-    <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/Alathra/Template-Gradle-Plugin/total?style=for-the-badge&logo=github&logoColor=white&labelColor=141417">
+<a href="https://github.com/milkdrinkers/Minecraft-Plugin-Template/releases/latest">
+    <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/milkdrinkers/Minecraft-Plugin-Template/total?style=for-the-badge&logo=github&logoColor=white&labelColor=141417">
 </a>
 <a href="https://www.spigotmc.org/">
     <img alt="Spiget Downloads" src="https://img.shields.io/spiget/downloads/9089?style=for-the-badge&logo=spigotmc&logoColor=white&label=SPIGOT&labelColor=141417">
@@ -63,7 +67,7 @@ Experimental builds/snapshots are denoted by having `SNAPSHOT` in the name and s
 
 ## 🤝 Bugs & Feature Requests
 
-If you happen to find any bugs or wish to request a feature, please open an issue on our [issue tracker here](https://github.com/Alathra/Template-Gradle-Plugin/issues). We provide bug report and feature request templates, so it is important that you fill out all the necessary information.
+If you happen to find any bugs or wish to request a feature, please open an issue on our [issue tracker here](https://github.com/milkdrinkers/Minecraft-Plugin-Template/issues). We provide bug report and feature request templates, so it is important that you fill out all the necessary information.
 
 Making your issue easy to read and follow will usually result in it being handled faster. Failure to provide the requested information in an issue may result in it being closed.
 
@@ -74,7 +78,7 @@ Making your issue easy to read and follow will usually result in it being handle
 <a href="">
     <img alt="Documentation" src="https://img.shields.io/badge/DOCUMENTATION-900C3F?style=for-the-badge&labelColor=141417">
 </a>
-<a href="https://jitpack.io/com/github/Alathra/Template-Gradle-Plugin/latest/javadoc/">
+<a href="https://jitpack.io/com/github/milkdrinkers/Minecraft-Plugin-Template/latest/javadoc/">
     <img alt="Javadoc" src="https://img.shields.io/badge/JAVADOC-8A2BE2?style=for-the-badge&labelColor=141417">
 </a>
 
@@ -149,3 +153,7 @@ You can find the license the source code and all assets are under [here](../LICE
 ## ❤️ Acknowledgments
 
 - **[SOME_NAME:](LINK)** _Lorem ipsum dolor sit amet, consectetur adipiscing elit._
+
+---
+
+![Project Usage](https://bstats.org/signatures/bukkit/EssentialsX.svg)
