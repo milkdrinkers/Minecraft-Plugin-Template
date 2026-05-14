@@ -1,27 +1,27 @@
 <div align="center" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
   <img align="center" style="text-align:center;" src="assets/example_banner.webp" alt="project banner">
 
-<h1>Project Name</h1>
+  <h1>Project Name</h1>
 
-_Write your description of what your plugin is for here! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis a justo sit amet suscipit. Integer nec ipsum tincidunt, pretium lectus quis, feugiat elit. Phasellus nisl purus, ullamcorper a magna vel, commodo scelerisque ante. Nam mollis nulla non risus accumsan, ut porttitor justo gravida. Aenean turpis elit, porta sit amet diam sit amet, congue hendrerit est. Mauris pharetra elit lacus, id dictum diam facilisis vitae. Curabitur non finibus ex._
+  _Write your description of what your plugin is for here! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis a justo sit amet suscipit. Integer nec ipsum tincidunt, pretium lectus quis, feugiat elit. Phasellus nisl purus, ullamcorper a magna vel, commodo scelerisque ante. Nam mollis nulla non risus accumsan, ut porttitor justo gravida. Aenean turpis elit, porta sit amet diam sit amet, congue hendrerit est. Mauris pharetra elit lacus, id dictum diam facilisis vitae. Curabitur non finibus ex._
 
-<br>
-<div>
+  <br>
+  <div>
     <a href="https://github.com/milkdrinkers/Minecraft-Plugin-Template/blob/main/LICENSE">
-        <img alt="GitHub License" src="https://img.shields.io/github/license/milkdrinkers/Minecraft-Plugin-Template?style=for-the-badge&color=blue&labelColor=141417">
+      <img alt="GitHub License" src="https://img.shields.io/github/license/milkdrinkers/Minecraft-Plugin-Template?style=for-the-badge&color=blue&labelColor=141417">
     </a>
     <a href="https://github.com/milkdrinkers/Minecraft-Plugin-Template/releases">
-        <img alt="GitHub Release" src="https://img.shields.io/github/v/release/milkdrinkers/Minecraft-Plugin-Template?include_prereleases&sort=semver&style=for-the-badge&label=LATEST%20VERSION&labelColor=141417">
+      <img alt="GitHub Release" src="https://img.shields.io/github/v/release/milkdrinkers/Minecraft-Plugin-Template?include_prereleases&sort=semver&style=for-the-badge&label=LATEST%20VERSION&labelColor=141417">
     </a>
     <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/milkdrinkers/Minecraft-Plugin-Template/ci.yml?style=for-the-badge&labelColor=141417">
     <a href="https://github.com/milkdrinkers/Minecraft-Plugin-Template/issues">
-        <img alt="GitHub Issues" src="https://img.shields.io/github/issues/milkdrinkers/Minecraft-Plugin-Template?style=for-the-badge&labelColor=141417">
+      <img alt="GitHub Issues" src="https://img.shields.io/github/issues/milkdrinkers/Minecraft-Plugin-Template?style=for-the-badge&labelColor=141417">
     </a>
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/milkdrinkers/Minecraft-Plugin-Template?style=for-the-badge&labelColor=141417">
     <a href="https://discord.gg/cG5uWvUcM6">
-        <img alt="Discord Server" src="https://img.shields.io/badge/-DISCORD-5865F2?style=for-the-badge&logo=discord&logoColor=ffffff&color=%235865F2">
+      <img alt="Discord Server" src="https://img.shields.io/badge/-DISCORD-5865F2?style=for-the-badge&logo=discord&logoColor=ffffff&color=%235865F2">
     </a>
-</div>
+  </div>
 </div>
 
 ---
@@ -82,7 +82,7 @@ Making your issue easy to read and follow will usually result in it being handle
     <img alt="Javadoc" src="https://img.shields.io/badge/JAVADOC-8A2BE2?style=for-the-badge&labelColor=141417">
 </a>
 
-We provide API for developers accessible through [JitPack](https://jitpack.io/). 
+We provide API for developers accessible through [JitPack](https://jitpack.io/).
 
 <details>
 <summary>Gradle Kotlin DSL</summary>
@@ -100,6 +100,7 @@ dependencies {
     compileOnly("io.github.exampleuser:exampleplugin:VERSION")
 }
 ```
+
 </details>
 
 <details>
@@ -124,6 +125,7 @@ dependencies {
     </dependencies>
 </project>
 ```
+
 </details>
 
 ---
@@ -146,7 +148,7 @@ If you wish to help translate the plugin check out our [Crowdin here](https://cr
 
 ## 📝 Licensing
 
-You can find the license the source code and all assets are under [here](../LICENSE). Additionally, contributors agree to the Contributor License Agreement \(*CLA*\) found [here](CONTRIBUTOR_LICENSE_AGREEMENT.md).
+You can find the license the source code and all assets are under [here](../LICENSE). Additionally, contributors agree to the Contributor License Agreement \(_CLA_\) found [here](CONTRIBUTOR_LICENSE_AGREEMENT.md).
 
 ---
 
