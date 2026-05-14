@@ -1,5 +1,5 @@
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align: center;">
-<img style="text-align:center;" src="assets/example_banner.webp" alt="project banner">
+<div align="center" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+  <img align="center" style="text-align:center;" src="assets/example_banner.webp" alt="project banner">
 
 <h1>Project Name</h1>
 
