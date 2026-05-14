@@ -78,26 +78,22 @@ Making your issue easy to read and follow will usually result in it being handle
 <a href="">
     <img alt="Documentation" src="https://img.shields.io/badge/DOCUMENTATION-900C3F?style=for-the-badge&labelColor=141417">
 </a>
-<a href="https://jitpack.io/com/github/milkdrinkers/Minecraft-Plugin-Template/latest/javadoc/">
+<a href="https://javadoc.io/doc/io.github.exampleuser/example-api">
     <img alt="Javadoc" src="https://img.shields.io/badge/JAVADOC-8A2BE2?style=for-the-badge&labelColor=141417">
 </a>
 
-We provide API for developers accessible through [JitPack](https://jitpack.io/).
+We provide API for developers accessible through [Maven Central](https://central.sonatype.com/artifact/io.github.exampleuser/example-api).
 
 <details>
 <summary>Gradle Kotlin DSL</summary>
 
 ```kotlin
 repositories {
-    maven("https://jitpack.io") {
-        content {
-            includeGroup("io.github.exampleuser")
-        }
-    }
+    mavenCentral()
 }
 
 dependencies {
-    compileOnly("io.github.exampleuser:exampleplugin:VERSION")
+    compileOnly("io.github.exampleuser:example-api:VERSION")
 }
 ```
 
@@ -108,17 +104,10 @@ dependencies {
 
 ```xml
 <project>
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>io.github.exampleuser</groupId>
-            <artifactId>exampleplugin</artifactId>
+            <artifactId>example-api</artifactId>
             <version>VERSION</version>
             <scope>provided</scope>
         </dependency>
