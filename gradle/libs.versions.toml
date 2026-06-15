@@ -39,7 +39,7 @@ packetevents = "com.github.retrooper:packetevents-spigot:2.12.2"
 placeholderapi = "me.clip:placeholderapi:2.12.2"
 
 # Database dependencies
-hikaricp = "com.zaxxer:HikariCP:7.0.2"
+hikaricp = "com.zaxxer:HikariCP:7.1.0"
 flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
 flyway-mysql = { module = "org.flywaydb:flyway-mysql", version.ref = "flyway" }
 jooq = { module = "org.jooq:jooq", version.ref = "jooq" }
