@@ -84,4 +84,4 @@ plugin-yml-bukkit = "de.eldoria.plugin-yml.bukkit:0.9.0"
 plugin-yml-paper = "de.eldoria.plugin-yml.paper:0.9.0"
 paperweight = "io.papermc.paperweight.userdev:1.7.7"
 jooq = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }
-publisher = "com.vanniktech.maven.publish:0.36.0"
+publisher = "com.vanniktech.maven.publish:0.37.0"
