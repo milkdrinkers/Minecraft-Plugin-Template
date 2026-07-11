@@ -77,7 +77,6 @@ public class Example extends AbstractExample {
             updateHandler,
             schedulerHandler,
             cooldownHandler,
-            cooldownHandler,
             apiHandler
         );
 
