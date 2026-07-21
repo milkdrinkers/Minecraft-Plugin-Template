@@ -16,7 +16,7 @@ morepaperlib = "space.arim.morepaperlib:morepaperlib:0.5.3"
 
 # API dependencies
 javasemver = "io.github.milkdrinkers:javasemver:1.0.2"
-versionwatch = "io.github.milkdrinkers:versionwatch:1.1.0"
+versionwatch = "io.github.milkdrinkers:versionwatch:1.2.0"
 wordweaver = "io.github.milkdrinkers:wordweaver:0.0.7"
 yaml = { module = "org.yaml:snakeyaml", version = "2.6" }
 configurate-geantyref = "io.leangen.geantyref:geantyref:2.0.1"
