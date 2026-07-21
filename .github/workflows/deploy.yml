@@ -69,7 +69,7 @@ jobs:
 
       # Generate changelog
       - name: Generate Changelog
-        uses: ardalanamini/auto-changelog@v4
+        uses: ardalanamini/auto-changelog@v5
         id: changelog
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
