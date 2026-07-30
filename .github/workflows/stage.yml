@@ -87,7 +87,7 @@ jobs:
       # Generate build provenance attestations if enabled
       - name: Generate Build Provenance Attestations
         if: ${{ inputs.generate_attestations }}
-        uses: actions/attest@v4
+        uses: actions/attest@v4.2.0
         with:
           subject-path: |
             ${{ github.workspace }}/api/build/libs/*.jar
@@ -190,7 +190,7 @@ jobs:
 
       - name: Generate Build Provenance Attestations
         if: ${{ inputs.generate_attestations }}
-        uses: actions/attest@v4
+        uses: actions/attest@v4.2.0
         with:
           subject-path: |
             ${{ github.workspace }}/api/build/libs/*.jar
