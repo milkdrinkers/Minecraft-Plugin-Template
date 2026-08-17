@@ -1,7 +1,7 @@
 [versions]
 paper-api = "1.21.11-R0.1-SNAPSHOT"
 paper-run = "1.21.11"
-commandapi = "11.2.0"
+commandapi = "12.0.0"
 flyway = "12.11.0"
 jooq = "3.21.6"
 configurate = "4.2.0-GeyserMC-SNAPSHOT"
