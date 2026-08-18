@@ -92,6 +92,9 @@ tasks {
         reloc("com.google.gson", "google")
 
         mergeServiceFiles()
+        filesMatching("META-INF/services/**") {
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        }
     }
 
     runServer {

@@ -58,7 +58,7 @@ final class TranslationCommand extends Command {
     }
 
     private void executorReload(CommandSender sender, CommandArguments args) {
-        Translation.setLanguage(Cfg.get().language);
+        Translation.setLocale(Cfg.get().language);
         Translation.reload();
         sender.sendMessage(Translation.as("commands.translation.reloaded"));
     }

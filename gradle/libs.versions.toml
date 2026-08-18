@@ -7,6 +7,7 @@ jooq = "3.21.7"
 configurate = "4.2.0-GeyserMC-SNAPSHOT"
 colorparser = "4.2.0"
 threadutil = "1.4.0"
+wordweaver = "0.1.0"
 
 [libraries]
 # Core dependencies
@@ -17,7 +18,8 @@ morepaperlib = "space.arim.morepaperlib:morepaperlib:0.5.3"
 # API dependencies
 javasemver = "io.github.milkdrinkers:javasemver:1.0.2"
 versionwatch = "io.github.milkdrinkers:versionwatch:1.1.0"
-wordweaver = "io.github.milkdrinkers:wordweaver:0.0.7"
+wordweaver-core = { module = "io.github.milkdrinkers:wordweaver", version.ref = "wordweaver" }
+wordweaver-json = { module = "io.github.milkdrinkers:wordweaver-json-shaded", version.ref = "wordweaver" }
 yaml = { module = "org.yaml:snakeyaml", version = "2.6" }
 configurate-geantyref = "io.leangen.geantyref:geantyref:2.0.1"
 configurate-interfaces-ap = { module = "org.spongepowered:configurate-extra-interface-ap", version.ref = "configurate" }
@@ -71,6 +73,7 @@ testcontainers-rabbitmq = { module = "org.testcontainers:testcontainers-rabbitmq
 [bundles]
 configurate-core = ["configurate-core", "configurate-interfaces-core", "configurate-interfaces-ap", "configurate-geantyref"]
 configurate-yaml = ["configurate-yaml", "yaml"]
+wordweaver = ["wordweaver-core", "wordweaver-json"]
 flyway = ["flyway-core", "flyway-mysql"]
 jdbcdrivers = ["h2", "sqlite", "mysql", "mariadb"]
 messagingclients = ["jedis", "nats", "rabbitmq"]
