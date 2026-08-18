@@ -111,9 +111,13 @@ public class UpdateHandler implements Reloadable {
      */
     private Version getCurrentVersion(Example plugin) {
         try {
-            return Version.of(plugin.getPluginMeta().getVersion());
+            return Version.parseLoose(plugin.getPluginMeta().getVersion());
         } catch (VersionParseException e) {
-            return Version.of(0, 0, 1, "", "");
+            return Version.builder()
+                .withMajor(0)
+                .withMinor(0)
+                .withPatch(1)
+                .build();
         }
     }
 }

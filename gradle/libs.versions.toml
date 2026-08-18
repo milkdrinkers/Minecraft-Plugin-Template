@@ -16,8 +16,8 @@ paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
 morepaperlib = "space.arim.morepaperlib:morepaperlib:0.5.3"
 
 # API dependencies
-javasemver = "io.github.milkdrinkers:javasemver:1.0.2"
-versionwatch = "io.github.milkdrinkers:versionwatch:1.1.0"
+javasemver = "io.github.milkdrinkers:javasemver:2.0.0"
+versionwatch = "io.github.milkdrinkers:versionwatch:1.3.0"
 wordweaver-core = { module = "io.github.milkdrinkers:wordweaver", version.ref = "wordweaver" }
 wordweaver-json = { module = "io.github.milkdrinkers:wordweaver-json-shaded", version.ref = "wordweaver" }
 yaml = { module = "org.yaml:snakeyaml", version = "2.6" }
