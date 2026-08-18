@@ -28,27 +28,21 @@ abstract class ProjectExtensionsPlugin : Plugin<Project> {
     }
 
     private fun getAuthors(project: Project): List<String> {
-        val authors = project.rootProject.properties["authors"] ?: return emptyList()
-
-        if (authors !is String)
-            return emptyList()
+        val authors = project.rootProject.providers.gradleProperty("authors").orNull ?: return emptyList()
 
         if (authors.isBlank())
             return emptyList()
 
-        return authors.split(",", " ").filter { s -> !s.isBlank() }
+        return authors.split(",", " ").filter { s -> s.isNotBlank() }
     }
 
     private fun getContributors(project: Project): List<String> {
-        val contributors = project.rootProject.properties["contributors"] ?: return emptyList()
-
-        if (contributors !is String)
-            return emptyList()
+        val contributors = project.rootProject.providers.gradleProperty("contributors").orNull ?: return emptyList()
 
         if (contributors.isBlank())
             return emptyList()
 
-        return contributors.split(",", " ").filter { s -> !s.isBlank() }
+        return contributors.split(",", " ").filter { s -> s.isNotBlank() }
     }
 }
 
